@@ -1,0 +1,107 @@
+.home {
+    max-width: 450px;
+    &-show-main {
+        padding-bottom: 10px;
+        .type-end{
+            position: relative;
+                &::before {
+                content: "Time Out !";
+                text-align: center;
+                padding-top: 36px;
+                font-size: 20px;
+                position: absolute;
+                top: 4px;
+                left: 5px;
+                background-color: grey;
+                border-radius: 4px;
+                opacity: .8;
+                height: 110px;
+                width: 440px;
+                z-index: 9;
+            }
+        }
+        &-window {
+            padding: 0 8px 10px 8px;
+            font-size: 20px;
+            color: black;
+            background-color: white;
+            border-radius: 4px;
+            border: 1px solid #209cff;
+            height: 116px;
+            overflow: hidden;
+            .correct {
+                color: green;
+            }
+            .incorrect {
+                color: red;
+            }
+            &--label {
+                font-size: 14px;
+                text-align: center;
+                position: relative;
+                top: 10px;
+                &.acting:before {
+                    content: "";
+                    position: absolute;
+                    left: -6%;
+                    top: 0;
+                    width: 112%;
+                    height: 42px;
+                    background-color: grey;
+                    border-radius: 4px;
+                    opacity: .4;
+                }
+            }
+        }
+    }
+    &-input {
+        line-height: 2;
+        font-size: 20px;
+    }
+    &-countdown {
+        cursor: pointer;
+        background-color: #666666;
+        border-radius: 2px;
+        text-align: center;
+        padding: 6px 0;
+        .ant-statistic-content-value {
+            color: white;
+            position: relative;
+        }
+        &.time-ready .ant-statistic-content-value:before {
+            content: "1:00";
+            position: absolute;
+            top: -4px;
+            left: 0;
+            background-color: #666666;
+        }
+    }
+    &-btn {
+        height: 50px;
+        width: 50px;
+        span {
+            font-size: 26px;
+            position: relative;
+            top: 2px;
+        }
+    }
+    .result-wpm {
+        text-align: center;
+        font-size: 40px;
+    }
+    .result-title {
+        font-size: 20px;
+        padding-left: 20px;
+    }
+    .result-numbers {
+        font-size: 20px;
+        padding-right: 20px;
+        text-align: right;
+        &.correct {
+            color: green;
+        }
+        &.wrong {
+            color: red;
+        }
+    }
+}

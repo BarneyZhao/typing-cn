@@ -1,0 +1,13 @@
+body {
+    margin: 0;
+    padding: 0;
+    color: white;
+    & a {
+        color: aliceblue;
+    }
+}
+.app-main {
+    background-color: #282c34;
+    padding: 10px;
+    min-height: 300px;
+}

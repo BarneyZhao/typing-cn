@@ -1,37 +1,39 @@
-# typing-cn
+## React项目模板
 
-#### 介绍
-type test
+``` 基础架构由create-react-app生成 ```
 
-#### 软件架构
-软件架构说明
+### 技术架构
 
+- react-router
+- typescript
+- sass
 
-#### 安装教程
+#### 按路由使用懒加载分包打包策略，路由配置方式见 ```/src/router/routes.ts```，具体实现逻辑见 ```/src/router/index.tsx```
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+### 项目开发
 
-#### 使用说明
+``` shell
+yarn install
+yarn dev
+```
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+### 项目构建
 
-#### 参与贡献
+- 预发构建模式
+``` shell
+yarn beta
+```
+```注：相比生产环境构建只少了cdn地址```
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+- 生产构建模式
+``` shell
+yarn online
+```
 
+### 发布说明
 
-#### 码云特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  码云官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解码云上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是码云最有价值开源项目，是码云综合评定出的优秀开源项目
-5.  码云官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+- 切换到需要发布的代码分支
+- ```yarn beta``` or ```yarn online ```（将生成dist文件夹）
+- 切换到 beta（预发）或 master（生产）分支，将```v3```文件夹删掉，将```dist```文件夹重命名为```v3```
+- 分支提交变更、push
+- j-one发布
