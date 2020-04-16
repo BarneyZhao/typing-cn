@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Input, Row, Col, Statistic, Button } from 'antd';
 import { ReloadOutlined } from '@ant-design/icons';
 import './Home.scss';
@@ -7,6 +7,15 @@ import WORDS from '@/words';
 const { Countdown } = Statistic;
 
 const oneLineHeight = 53;
+const shuffle = (arr: any[]) => {
+    for (let i = arr.length - 1; i >= 0; i--) {
+        let rIndex = Math.floor(Math.random() * (i + 1));
+        let temp = arr[rIndex];
+        arr[rIndex] = arr[i];
+        arr[i] = temp;
+    }
+    return arr;
+};
 
 const Home: React.FC = () => {
     const [deadline, setDeadline] = useState(0);
@@ -32,6 +41,7 @@ const Home: React.FC = () => {
                 return [{ ...wordsTemp[wordIndexRef.current] }];
             } else {
                 wordIndexRef.current += 1;
+                if (wordIndexRef.current >= wordsTemp.length) wordIndexRef.current = 0;
                 return arr.concat({ ...wordsTemp[wordIndexRef.current] });
             }
         });
@@ -45,15 +55,16 @@ const Home: React.FC = () => {
         });
         return isCorrect;
     };
-    const reloadBtn = () => {
+    const reloadBtn = useCallback(() => {
         lineIndexLockRef.current = false;
         lineCountRef.current = 0;
         timeStartRef.current = false;
         setTypingEnd(false);
         setWordInput('');
         setActingWordIndex(0);
+        shuffle(WORDS);
         pushWordToArr(true);
-    };
+    }, []);
     const onCountdonwFinish = () => {
         if (timeStartRef.current) {
             setTypingEnd(true);
@@ -68,7 +79,7 @@ const Home: React.FC = () => {
             const outterScrollTop = (wordsContainerEl.current as any).scrollTop;
             Array.from(wordContainerRow.children).forEach((child: any, index: number) => {
                 if (
-                    child.offsetTop === oneLineHeight * 2 + outterScrollTop &&
+                    child.offsetTop === oneLineHeight + 11 + outterScrollTop && // 11 = body的padding + window的border
                     !lineIndexLockRef.current
                 ) {
                     nextLineStartIndexRef.current = index;
@@ -99,6 +110,8 @@ const Home: React.FC = () => {
         timeStartRef.current = true;
         const inputArr = Array.from(wordInput.trim());
         if (wordInput[wordInput.length - 1] === ' ') {
+            setWordInput('');
+            if (inputArr.length === 0) return;
             setWordArr((arr) => {
                 let tempArr = [...arr];
                 const targetWord = tempArr[actingWordIndex];
@@ -107,7 +120,6 @@ const Home: React.FC = () => {
                     isCorrect && inputArr.length === targetWord.text.length;
                 return tempArr;
             });
-            setWordInput('');
             setActingWordIndex(actingWordIndex + 1);
             if (actingWordIndex + 1 === nextLineStartIndexRef.current) {
                 lineCountRef.current += 1;
@@ -125,6 +137,10 @@ const Home: React.FC = () => {
             });
         }
     }, [actingWordIndex, wordInput]);
+
+    useEffect(() => {
+        reloadBtn();
+    }, [reloadBtn]);
 
     return (
         <div className="home">

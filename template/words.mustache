@@ -1,0 +1,14 @@
+// auto generate
+export default [
+    {{#wordList}}
+    {
+        label: '{{label}}',
+        text: '{{text}}',
+        isCorrect: null,
+    },
+    {{/wordList}}
+] as Array<{
+    label: string;
+    text: string;
+    isCorrect: null | boolean;
+}>;
