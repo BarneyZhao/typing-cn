@@ -521,11 +521,6 @@ export default [
         isCorrect: null,
     },
     {
-        label: '汉堡包',
-        text: 'hanpubao',
-        isCorrect: null,
-    },
-    {
         label: '周末',
         text: 'zhoumo',
         isCorrect: null,
