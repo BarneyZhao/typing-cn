@@ -1,12 +1,13 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Input, Row, Col, Statistic, Button } from 'antd';
 import { ReloadOutlined } from '@ant-design/icons';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+
+import { storeConnect, MapState, MapDispatch } from '@/store/index';
 import './Home.scss';
 import WORDS from '@/words';
 
 const { Countdown } = Statistic;
 
-const oneLineHeight = 53;
 const shuffle = (arr: any[]) => {
     for (let i = arr.length - 1; i >= 0; i--) {
         let rIndex = Math.floor(Math.random() * (i + 1));
@@ -17,18 +18,23 @@ const shuffle = (arr: any[]) => {
     return arr;
 };
 
-const Home: React.FC = () => {
+const Home: React.FC<MapState & MapDispatch> = (props) => {
     const [deadline, setDeadline] = useState(0);
     const [actingWordIndex, setActingWordIndex] = useState(0);
     const [wordArr, setWordArr] = useState<typeof WORDS>([]);
     const [wordInput, setWordInput] = useState('');
     const [typingEnd, setTypingEnd] = useState(false);
-    const wordsContainerEl = useRef(null);
+    const postionVerticalRef = useRef<
+        'start' | 'end' | 'center' | 'space-around' | 'space-between' | undefined
+    >('center');
+    const mainWindowEl = useRef(null);
     const wordIndexRef = useRef(0); // WORDS数组的下标
     const lineIndexLockRef = useRef(false); // 是否设置过第二行开头元素的下标
     const nextLineStartIndexRef = useRef(0);
     const lineCountRef = useRef(0);
     const timeStartRef = useRef(false);
+    const oneLineHeightRef = useRef(53);
+    const keystrokeCountRef = useRef(0);
 
     const countDownStart = () => {
         setDeadline(Date.now() + 60 * 1000);
@@ -59,6 +65,7 @@ const Home: React.FC = () => {
         lineIndexLockRef.current = false;
         lineCountRef.current = 0;
         timeStartRef.current = false;
+        keystrokeCountRef.current = 0;
         setTypingEnd(false);
         setWordInput('');
         setActingWordIndex(0);
@@ -73,13 +80,15 @@ const Home: React.FC = () => {
     };
 
     useEffect(() => {
-        if (wordsContainerEl) {
-            const wordContainerRow = (wordsContainerEl.current as any).lastElementChild;
+        if (mainWindowEl) {
+            const wordContainerRow = (mainWindowEl.current as any).lastElementChild;
             if (!wordContainerRow || !wordContainerRow.lastElementChild) return;
-            const outterScrollTop = (wordsContainerEl.current as any).scrollTop;
+            const outterScrollTop = (mainWindowEl.current as any).scrollTop;
             Array.from(wordContainerRow.children).forEach((child: any, index: number) => {
+                oneLineHeightRef.current = child.offsetHeight;
                 if (
-                    child.offsetTop === oneLineHeight + 11 + outterScrollTop && // 11 = body的padding + window的border
+                    child.offsetTop - wordContainerRow.offsetTop ===
+                        oneLineHeightRef.current + outterScrollTop &&
                     !lineIndexLockRef.current
                 ) {
                     nextLineStartIndexRef.current = index;
@@ -87,8 +96,10 @@ const Home: React.FC = () => {
                 }
             });
             if (
-                wordContainerRow.lastElementChild.offsetTop - outterScrollTop <
-                oneLineHeight * 3 + 1
+                wordContainerRow.lastElementChild.offsetTop -
+                    wordContainerRow.offsetTop -
+                    outterScrollTop <
+                oneLineHeightRef.current * 3 + 1
             ) {
                 pushWordToArr();
             }
@@ -123,7 +134,8 @@ const Home: React.FC = () => {
             setActingWordIndex(actingWordIndex + 1);
             if (actingWordIndex + 1 === nextLineStartIndexRef.current) {
                 lineCountRef.current += 1;
-                (wordsContainerEl.current as any).scrollTop = oneLineHeight * lineCountRef.current;
+                (mainWindowEl.current as any).scrollTop =
+                    oneLineHeightRef.current * lineCountRef.current;
                 lineIndexLockRef.current = false;
                 pushWordToArr();
             }
@@ -140,89 +152,106 @@ const Home: React.FC = () => {
 
     useEffect(() => {
         reloadBtn();
+        window.addEventListener('keyup', () => {
+            keystrokeCountRef.current += 1;
+        });
     }, [reloadBtn]);
 
     return (
         <div className="home">
-            <div className="home-show-main">
-                {typingEnd && <div className="type-end"></div>}
-                <div className="home-show-main-window" ref={wordsContainerEl}>
-                    <Row gutter={12}>
-                        {wordArr.map((item, index) => (
-                            <Col
-                                key={index}
-                                className={`${item.isCorrect === true ? 'correct' : ''} ${
-                                    item.isCorrect === false ? 'incorrect' : ''
+            <Row justify={postionVerticalRef.current}>
+                <Col flex="450px" className={`home-scale-box-${props.$state.root.uiScale}`}>
+                    <div className="home-show-main">
+                        {typingEnd && <div className="type-end"></div>}
+                        <div className="home-show-main-window" ref={mainWindowEl}>
+                            <Row gutter={12}>
+                                {wordArr.map((item, index) => (
+                                    <Col
+                                        key={index}
+                                        className={`${item.isCorrect === true ? 'correct' : ''} ${
+                                            item.isCorrect === false ? 'incorrect' : ''
+                                        }`}
+                                    >
+                                        <div
+                                            className={`home-show-main-window--label ${
+                                                actingWordIndex === index ? 'acting' : ''
+                                            }`}
+                                        >
+                                            {item.label}
+                                        </div>
+                                        <div className="home-show-main-window--text">
+                                            {item.text}
+                                        </div>
+                                    </Col>
+                                ))}
+                            </Row>
+                        </div>
+                    </div>
+                    <Row justify="space-between" align="middle" gutter={0}>
+                        <Col flex="285px">
+                            <Input
+                                className="home-input"
+                                value={wordInput}
+                                disabled={typingEnd}
+                                onChange={(evt) => {
+                                    setWordInput(evt.target.value);
+                                }}
+                            ></Input>
+                        </Col>
+                        <Col flex="90px">
+                            <Countdown
+                                className={`home-countdown ${
+                                    !timeStartRef.current ? 'time-ready' : ''
                                 }`}
-                            >
-                                <div
-                                    className={`home-show-main-window--label ${
-                                        actingWordIndex === index ? 'acting' : ''
-                                    }`}
-                                >
-                                    {item.label}
-                                </div>
-                                <div className="home-show-main-window--text">{item.text}</div>
-                            </Col>
-                        ))}
+                                value={deadline}
+                                format="m:ss"
+                                onFinish={onCountdonwFinish}
+                            ></Countdown>
+                        </Col>
+                        <Col flex="50px">
+                            <Button
+                                className="home-btn"
+                                onClick={reloadBtn}
+                                type="primary"
+                                icon={<ReloadOutlined />}
+                            />
+                        </Col>
                     </Row>
-                </div>
-            </div>
-            <Row justify="space-between" align="middle">
-                <Col span={15}>
-                    <Input
-                        className="home-input"
-                        value={wordInput}
-                        disabled={typingEnd}
-                        onChange={(evt) => {
-                            setWordInput(evt.target.value);
-                        }}
-                    ></Input>
-                </Col>
-                <Col span={5}>
-                    <Countdown
-                        className={`home-countdown ${!timeStartRef.current ? 'time-ready' : ''}`}
-                        value={deadline}
-                        format="m:ss"
-                        onFinish={onCountdonwFinish}
-                    ></Countdown>
-                </Col>
-                <Col span={3}>
-                    <Button
-                        className="home-btn"
-                        onClick={reloadBtn}
-                        type="primary"
-                        icon={<ReloadOutlined />}
-                    />
+                    {typingEnd && (
+                        <Row>
+                            <Col span={24}>
+                                <div className="result-wpm">
+                                    {wordArr.filter((word) => word.isCorrect !== null).length} WPM
+                                </div>
+                            </Col>
+                            <Col span={12}>
+                                <div className="result-title">Correct</div>
+                            </Col>
+                            <Col span={12}>
+                                <div className="result-numbers correct">
+                                    {wordArr.filter((word) => word.isCorrect === true).length}
+                                </div>
+                            </Col>
+                            <Col span={12}>
+                                <div className="result-title">Wrong</div>
+                            </Col>
+                            <Col span={12}>
+                                <div className="result-numbers wrong">
+                                    {wordArr.filter((word) => word.isCorrect === false).length}
+                                </div>
+                            </Col>
+                            <Col span={12}>
+                                <div className="result-title">Keystroke</div>
+                            </Col>
+                            <Col span={12}>
+                                <div className="result-numbers">{keystrokeCountRef.current}</div>
+                            </Col>
+                        </Row>
+                    )}
                 </Col>
             </Row>
-            {typingEnd && (
-                <Row>
-                    <Col span={24}>
-                        <div className="result-wpm">
-                            {wordArr.filter((word) => word.isCorrect !== null).length} WPM
-                        </div>
-                    </Col>
-                    <Col span={12}>
-                        <div className="result-title">Correct</div>
-                    </Col>
-                    <Col span={12}>
-                        <div className="result-numbers correct">
-                            {wordArr.filter((word) => word.isCorrect === true).length}
-                        </div>
-                    </Col>
-                    <Col span={12}>
-                        <div className="result-title">Wrong</div>
-                    </Col>
-                    <Col span={12}>
-                        <div className="result-numbers wrong">
-                            {wordArr.filter((word) => word.isCorrect === false).length}
-                        </div>
-                    </Col>
-                </Row>
-            )}
         </div>
     );
 };
 
-export default Home;
+export default storeConnect(Home);

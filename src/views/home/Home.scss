@@ -1,5 +1,10 @@
 .home {
-    max-width: 450px;
+    .home-scale-box-m {
+        transform: scale(1.2) translateY(10%);
+    }
+    .home-scale-box-l {
+        transform: scale(1.5) translateY(20%);
+    }
     &-show-main {
         padding-bottom: 10px;
         .type-end{
