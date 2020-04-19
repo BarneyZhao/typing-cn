@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 import { storeConnect, MapState, MapDispatch } from '@/store/index';
 import './Home.scss';
-import WORDS from '@/words';
+import WORDS, { Word } from '@/words';
 
 const { Countdown } = Statistic;
 
@@ -17,16 +17,26 @@ const shuffle = (arr: any[]) => {
     }
     return arr;
 };
+const getWords = (mode: string, propWords: Word[]) => {
+    if (mode !== '1' && propWords && propWords.length !== 0) {
+        return propWords;
+    } else {
+        return WORDS;
+    }
+};
 
 const Home: React.FC<MapState & MapDispatch> = (props) => {
     const [deadline, setDeadline] = useState(0);
     const [actingWordIndex, setActingWordIndex] = useState(0);
-    const [wordArr, setWordArr] = useState<typeof WORDS>([]);
+    const [wordArr, setWordArr] = useState<Array<Word & { isCorrect: boolean | null }>>([]);
     const [wordInput, setWordInput] = useState('');
     const [typingEnd, setTypingEnd] = useState(false);
     const postionVerticalRef = useRef<
         'start' | 'end' | 'center' | 'space-around' | 'space-between' | undefined
     >('center');
+    const wordsBaseRef = useRef(
+        getWords(props.$state.root.wordsMode, props.$state.root.customerWords)
+    );
     const mainWindowEl = useRef(null);
     const wordIndexRef = useRef(0); // WORDS数组的下标
     const lineIndexLockRef = useRef(false); // 是否设置过第二行开头元素的下标
@@ -41,14 +51,14 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
     };
     const pushWordToArr = (isInit?: boolean) => {
         setWordArr((arr) => {
-            const wordsTemp = [...WORDS];
+            const wordsTemp = [...wordsBaseRef.current];
             if (isInit) {
                 wordIndexRef.current = 0;
-                return [{ ...wordsTemp[wordIndexRef.current] }];
+                return [{ isCorrect: null, ...wordsTemp[wordIndexRef.current] }];
             } else {
                 wordIndexRef.current += 1;
                 if (wordIndexRef.current >= wordsTemp.length) wordIndexRef.current = 0;
-                return arr.concat({ ...wordsTemp[wordIndexRef.current] });
+                return arr.concat({ isCorrect: null, ...wordsTemp[wordIndexRef.current] });
             }
         });
     };
@@ -69,7 +79,7 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
         setTypingEnd(false);
         setWordInput('');
         setActingWordIndex(0);
-        shuffle(WORDS);
+        wordsBaseRef.current = shuffle(wordsBaseRef.current);
         pushWordToArr(true);
     }, []);
     const onCountdonwFinish = () => {
@@ -151,6 +161,14 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
     }, [actingWordIndex, wordInput]);
 
     useEffect(() => {
+        wordsBaseRef.current = getWords(
+            props.$state.root.wordsMode,
+            props.$state.root.customerWords
+        );
+        reloadBtn();
+    }, [props.$state.root.wordsMode, props.$state.root.customerWords, reloadBtn]);
+
+    useEffect(() => {
         reloadBtn();
         window.addEventListener('keyup', () => {
             keystrokeCountRef.current += 1;
@@ -225,7 +243,7 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
                                 </div>
                             </Col>
                             <Col span={12}>
-                                <div className="result-title">Correct</div>
+                                <div className="result-title">正确</div>
                             </Col>
                             <Col span={12}>
                                 <div className="result-numbers correct">
@@ -233,7 +251,7 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
                                 </div>
                             </Col>
                             <Col span={12}>
-                                <div className="result-title">Wrong</div>
+                                <div className="result-title">错误</div>
                             </Col>
                             <Col span={12}>
                                 <div className="result-numbers wrong">
@@ -241,7 +259,7 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
                                 </div>
                             </Col>
                             <Col span={12}>
-                                <div className="result-title">Keystroke</div>
+                                <div className="result-title">按键总数</div>
                             </Col>
                             <Col span={12}>
                                 <div className="result-numbers">{keystrokeCountRef.current}</div>

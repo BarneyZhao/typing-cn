@@ -1,14 +1,15 @@
 // auto generate
-export default [
+export interface Word {
+    label: string;
+    text: string;
+}
+const defaultWords: Word[] = [
     {{#wordList}}
     {
         label: '{{label}}',
         text: '{{text}}',
-        isCorrect: null,
     },
     {{/wordList}}
-] as Array<{
-    label: string;
-    text: string;
-    isCorrect: null | boolean;
-}>;
+];
+
+export default defaultWords;
