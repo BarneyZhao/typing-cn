@@ -96,11 +96,11 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
             const outterScrollTop = (mainWindowEl.current as any).scrollTop;
             Array.from(wordContainerRow.children).forEach((child: any, index: number) => {
                 oneLineHeightRef.current = child.offsetHeight;
-                if (
-                    child.offsetTop - wordContainerRow.offsetTop ===
-                        oneLineHeightRef.current + outterScrollTop &&
-                    !lineIndexLockRef.current
-                ) {
+                const childTopToParent = child.offsetTop - wordContainerRow.offsetTop;
+                const showsSecLine = oneLineHeightRef.current + outterScrollTop;
+                const isNextLineCheck = // 判断是不是显示的两行中的第二行，存在小数公差
+                    showsSecLine - 5 < childTopToParent && childTopToParent < showsSecLine + 5;
+                if (!lineIndexLockRef.current && isNextLineCheck) {
                     nextLineStartIndexRef.current = index;
                     lineIndexLockRef.current = true;
                 }
