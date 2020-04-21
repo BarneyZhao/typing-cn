@@ -38,6 +38,7 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
         getWords(props.$state.root.wordsMode, props.$state.root.customerWords)
     );
     const mainWindowEl = useRef(null);
+    const mainInputEl = useRef(null);
     const wordIndexRef = useRef(0); // WORDS数组的下标
     const lineIndexLockRef = useRef(false); // 是否设置过第二行开头元素的下标
     const nextLineStartIndexRef = useRef(0);
@@ -81,6 +82,7 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
         setActingWordIndex(0);
         wordsBaseRef.current = shuffle(wordsBaseRef.current);
         pushWordToArr(true);
+        (mainInputEl.current as any).focus();
     }, []);
     const onCountdonwFinish = () => {
         if (timeStartRef.current) {
@@ -209,6 +211,7 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
                         <Col flex="285px">
                             <Input
                                 className="home-input"
+                                ref={mainInputEl}
                                 value={wordInput}
                                 disabled={typingEnd}
                                 onChange={(evt) => {
