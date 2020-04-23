@@ -1,3 +1,4 @@
+@import '../../themes/default.less';
 .home {
     .home-scale-box-m {
         transform: scale(1.2) translateY(10%);
@@ -18,6 +19,7 @@
                 top: 4px;
                 left: 5px;
                 background-color: grey;
+                color: @text-color-bright;
                 border-radius: 4px;
                 opacity: .8;
                 height: 110px;
@@ -26,12 +28,11 @@
             }
         }
         &-window {
-            padding: 0 8px 10px 8px;
+            padding: 0 8px 10px 12px;
             font-size: 20px;
-            color: black;
-            background-color: white;
+            background-color: @home-show-main-window-back-color;
+            color: @home-show-main-window-text-color;
             border-radius: 4px;
-            border: 1px solid #209cff;
             height: 116px;
             overflow: hidden;
             user-select: none;
@@ -53,9 +54,8 @@
                     top: 0;
                     width: 112%;
                     height: 42px;
-                    background-color: grey;
+                    background-color: @home-show-main-window-text-acting-background-color;
                     border-radius: 4px;
-                    opacity: .4;
                 }
             }
         }
@@ -63,15 +63,18 @@
     &-input {
         line-height: 2;
         font-size: 20px;
+        &:focus {
+            box-shadow: 0 0 0 6px @home-el-focus-color;
+        }
     }
     &-countdown {
         cursor: pointer;
-        background-color: #666666;
+        background-color: @home-countdown-back-color;
         border-radius: 2px;
         text-align: center;
         padding: 6px 0;
         .ant-statistic-content-value {
-            color: white;
+            color: @text-color-bright;
             position: relative;
         }
         &.time-ready .ant-statistic-content-value:before {
@@ -79,35 +82,41 @@
             position: absolute;
             top: -4px;
             left: 0;
-            background-color: #666666;
+            background-color: @home-countdown-back-color;
         }
     }
     &-btn {
         height: 50px;
         width: 50px;
+        &:focus {
+            box-shadow: 0 0 0 5px @home-el-focus-color;
+        }
         span {
             font-size: 26px;
             position: relative;
             top: 2px;
         }
     }
-    .result-wpm {
-        text-align: center;
-        font-size: 40px;
-    }
-    .result-title {
-        font-size: 20px;
-        padding-left: 20px;
-    }
-    .result-numbers {
-        font-size: 20px;
-        padding-right: 20px;
-        text-align: right;
-        &.correct {
-            color: green;
+    .home-type-result {
+        color: @text-color-bright;
+        .result-wpm {
+            text-align: center;
+            font-size: 40px;
         }
-        &.wrong {
-            color: red;
+        .result-title {
+            font-size: 20px;
+            padding-left: 20px;
+        }
+        .result-numbers {
+            font-size: 20px;
+            padding-right: 20px;
+            text-align: right;
+            &.correct {
+                color: @success-color;
+            }
+            &.wrong {
+                color: @error-color;
+            }
         }
     }
 }

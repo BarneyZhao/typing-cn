@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Row, Col, Button, Radio, Modal, Tabs, Input, Tooltip } from 'antd';
 import { SettingOutlined } from '@ant-design/icons';
 // import { Link } from 'react-router-dom';
-import './Header.scss';
+import './Header.less';
 import { storeConnect, MapState, MapDispatch } from '@/store/index';
 import WORDS from '@/words';
 import { getPinyin } from '@/utils/pinyin';
@@ -25,6 +25,11 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
         props.$dispatch('setUiScale', evt.target.value);
     };
     const handleModalOk = () => {
+        if (wordsMode === '1') {
+            props.$dispatch('setWordsMode', wordsMode);
+            setModalVisible(false);
+            return;
+        }
         const inputWordList = Array.from(new Set(words.split('|').filter(Boolean)));
         const errorList: string[] = [];
         if (inputWordList.length === 0) errorList.push('请输入字词，并以符号|间隔');
@@ -34,22 +39,21 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
         setErrorWordList(errorList);
         if (errorList.length === 0) {
             props.$dispatch('setWordsMode', wordsMode);
-            if (wordsMode === '2') {
-                setWords(inputWordList.join('|'));
-                console.time('getPinyin');
-                const actWordList = inputWordList.map((word) => ({
-                    label: word,
-                    text: getPinyin(word),
-                }));
-                console.timeEnd('getPinyin');
+            setWords(inputWordList.join('|'));
+            console.time('getPinyin');
+            const actWordList = inputWordList.map((word) => ({
+                label: word,
+                text: getPinyin(word),
+            }));
+            console.timeEnd('getPinyin');
 
-                props.$dispatch('saveCustomerWords', actWordList);
-            }
+            props.$dispatch('saveCustomerWords', actWordList);
             setModalVisible(false);
         }
     };
     const onTabsChange = (activeKey: string) => {
         setWordsMode(activeKey);
+        setErrorWordList([]);
     };
     const onTextInput = (evt: any) => {
         setWords(evt.target.value);
@@ -67,7 +71,7 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
                     >
                         设置
                     </Button>
-                    <span>UI尺寸:&nbsp;&nbsp;</span>
+                    <span className="radio-text">UI尺寸:&nbsp;&nbsp;</span>
                     <Radio.Group onChange={onUiSizeChange} defaultValue={props.$state.root.uiScale}>
                         <Radio value="s">正常</Radio>
                         <Radio value="m">大</Radio>

@@ -3,7 +3,7 @@ import { ReloadOutlined } from '@ant-design/icons';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 import { storeConnect, MapState, MapDispatch } from '@/store/index';
-import './Home.scss';
+import './Home.less';
 import WORDS, { Word } from '@/words';
 
 const { Countdown } = Statistic;
@@ -239,7 +239,7 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
                         </Col>
                     </Row>
                     {typingEnd && (
-                        <Row>
+                        <Row className="home-type-result">
                             <Col span={24}>
                                 <div className="result-wpm">
                                     {wordArr.filter((word) => word.isCorrect !== null).length} WPM
