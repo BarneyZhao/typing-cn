@@ -9,6 +9,8 @@ declare namespace NodeJS {
     }
 }
 
+declare module 'webpack-theme-color-replacer/client';
+
 declare module '*.bmp' {
     const src: string;
     export default src;

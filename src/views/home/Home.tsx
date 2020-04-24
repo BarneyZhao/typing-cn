@@ -31,9 +31,6 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
     const [wordArr, setWordArr] = useState<Array<Word & { isCorrect: boolean | null }>>([]);
     const [wordInput, setWordInput] = useState('');
     const [typingEnd, setTypingEnd] = useState(false);
-    const postionVerticalRef = useRef<
-        'start' | 'end' | 'center' | 'space-around' | 'space-between' | undefined
-    >('center');
     const wordsBaseRef = useRef(
         getWords(props.$state.root.wordsMode, props.$state.root.customerWords)
     );
@@ -179,7 +176,7 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
 
     return (
         <div className="home">
-            <Row justify={postionVerticalRef.current}>
+            <Row justify="center" align="middle">
                 <Col flex="450px" className={`home-scale-box-${props.$state.root.uiScale}`}>
                     <div className="home-show-main">
                         {typingEnd && <div className="type-end"></div>}
@@ -231,7 +228,7 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
                         </Col>
                         <Col flex="50px">
                             <Button
-                                className="home-btn"
+                                className="home-reload-btn"
                                 onClick={reloadBtn}
                                 type="primary"
                                 icon={<ReloadOutlined />}

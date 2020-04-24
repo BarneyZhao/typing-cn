@@ -1,6 +1,7 @@
-@import '../../themes/default.less';
+@import (reference) '~@/style/variable.less';
 .app-header {
     padding: 10px;
+    .ant-btn-link.ant-btn-background-ghost,
     .radio-text, .ant-radio-wrapper {
         color: @text-color-bright;
     }
@@ -10,5 +11,36 @@
     text-align: right;
     .error-word {
         color: @error-color;
+    }
+}
+.header-modal-confirm-btn {
+    span {
+        color: @text-color-bright;
+    }
+}
+.header-modal-setting {
+    .ant-modal-content {
+        background-color: @text-color-bright;
+    }
+}
+.header-modal-theme{
+    .ant-modal-content {
+        background-color: @text-color-bright;
+    }
+    &--box {
+        padding-top: 24px;
+        .theme-display-block {
+            height: 50px;
+            line-height: 50px;
+            border-radius: 10px;
+            background-color: red;
+            margin-top: 12px;
+            cursor: pointer;
+            text-align: center;
+            transition: transform .2s ease;
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
     }
 }

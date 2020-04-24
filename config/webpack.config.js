@@ -25,6 +25,9 @@ const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 
 const postcssNormalize = require('postcss-normalize');
 
+// barney add
+const ThemeColorReplacer = require('webpack-theme-color-replacer');
+
 const appPackageJson = require(paths.appPackageJson);
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
@@ -41,8 +44,8 @@ const useTypeScript = fs.existsSync(paths.appTsConfig);
 // style files regexes
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
-const sassRegex = /\.(scss|sass)$/;
-const sassModuleRegex = /\.module\.(scss|sass)$/;
+// const sassRegex = /\.(scss|sass)$/;
+// const sassModuleRegex = /\.module\.(scss|sass)$/;
 const lessRegex = /\.(less)$/;
 const lessModuleRegex = /\.module\.(less)$/;
 
@@ -121,7 +124,7 @@ module.exports = function(webpackEnv) {
                     loader: require.resolve(preProcessor),
                     options: {
                         sourceMap: true,
-                        javascriptEnabled: true,
+                        javascriptEnabled: true, // barney add. for ant-design less override
                     },
                 }
             );
@@ -643,6 +646,22 @@ module.exports = function(webpackEnv) {
                     // The formatter is invoked directly in WebpackDevServerUtils during development
                     formatter: isEnvProduction ? typescriptFormatter : undefined,
                 }),
+            // barney add. cutomer themes.
+            new ThemeColorReplacer({
+                matchColors: [
+                    '#1890ff', // @primary-color
+                    '#40a9ff', // ant-hover-color
+                    '#282c34', // @body-back-color
+                    '#fffffe', // @text-color-bright
+                    '#fffffd', // @home-window-back-color
+                    '#141414', // @home-window-text-color
+                    '0, 0, 0, 0.26', // @home-window-text-acting-back-color
+                    '224, 237, 249, 0.21', // @home-el-focus-color
+                    '#666666', // @home-countdown-back-color
+                ],
+                fileName: 'css/theme-colors-[contenthash:8].css',
+                injectCss: false,
+            }),
         ].filter(Boolean),
         // Some libraries import Node modules but don't use them in the browser.
         // Tell Webpack to provide empty mocks for them so importing them works.

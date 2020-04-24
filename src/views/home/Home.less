@@ -1,5 +1,8 @@
-@import '../../themes/default.less';
+@import (reference) '~@/style/variable.less';
 .home {
+    & > div {
+        height: calc(100vh - 200px);
+    }
     .home-scale-box-m {
         transform: scale(1.2) translateY(10%);
     }
@@ -30,17 +33,17 @@
         &-window {
             padding: 0 8px 10px 12px;
             font-size: 20px;
-            background-color: @home-show-main-window-back-color;
-            color: @home-show-main-window-text-color;
+            background-color: @home-window-back-color;
+            color: @home-window-text-color;
             border-radius: 4px;
             height: 116px;
             overflow: hidden;
             user-select: none;
             .correct {
-                color: green;
+                color: @success-color;
             }
             .incorrect {
-                color: red;
+                color: @error-color;
             }
             &--label {
                 font-size: 14px;
@@ -54,7 +57,7 @@
                     top: 0;
                     width: 112%;
                     height: 42px;
-                    background-color: @home-show-main-window-text-acting-background-color;
+                    background-color: @home-window-text-acting-back-color;
                     border-radius: 4px;
                 }
             }
@@ -85,13 +88,14 @@
             background-color: @home-countdown-back-color;
         }
     }
-    &-btn {
+    &-reload-btn {
         height: 50px;
         width: 50px;
         &:focus {
             box-shadow: 0 0 0 5px @home-el-focus-color;
         }
         span {
+            color: @text-color-bright;
             font-size: 26px;
             position: relative;
             top: 2px;
