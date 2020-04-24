@@ -10,6 +10,7 @@
 
 # production
 /dist
+/typing-cn
 
 # misc
 .DS_Store

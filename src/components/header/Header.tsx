@@ -14,7 +14,7 @@ const defaultWordStr = WORDS.map((item) => item.label).join('|');
 
 const Header: React.FC<MapState & MapDispatch> = (props) => {
     const [settingModalVisible, setSettingModalVisible] = useState(false);
-    const [themeModalVisible, setThemeModalVisible] = useState(true);
+    const [themeModalVisible, setThemeModalVisible] = useState(false);
     const [wordsMode, setWordsMode] = useState(props.$state.root.wordsMode);
     const defaultWordsRef = useRef(defaultWordStr);
     const [words, setWords] = useState(
