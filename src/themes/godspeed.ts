@@ -1,5 +1,5 @@
 export default {
-    name: 'goodspeed',
+    name: 'godspeed',
     textColor: '#faee69',
     '@primary-color': '#faee69',
     '@link-color': '#faee69',

@@ -5,7 +5,7 @@ import carbon from './carbon';
 import olivia from './olivia';
 import t9009 from './9009';
 import oblivion from './oblivion';
-import goodspeed from './goodspeed';
+import godspeed from './godspeed';
 import nautilus from './nautilus';
 
 export const changeColor = (themeObj: any) => {
@@ -22,6 +22,6 @@ export default [
     { ...olivia },
     { ...t9009 },
     { ...oblivion },
-    { ...goodspeed },
+    { ...godspeed },
     { ...nautilus },
 ];
