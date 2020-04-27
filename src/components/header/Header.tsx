@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react';
 import { Row, Col, Button, Radio, Modal, Tabs, Input, Tooltip } from 'antd';
 import { SettingOutlined, AppstoreOutlined } from '@ant-design/icons';
 // import { Link } from 'react-router-dom';
-import './Header.less';
 import { storeConnect, MapState, MapDispatch } from '@/store/index';
 import WORDS from '@/words';
 import { getPinyin } from '@/utils/pinyin';
@@ -132,7 +131,7 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
                             ))}
                         </Row>
                     </Col>
-                    <Col span={12}>
+                    <Col span={12} className="header-modal--total">
                         共(
                         {wordsMode === '1'
                             ? defaultWordsRef.current.split('|').length

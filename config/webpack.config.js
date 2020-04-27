@@ -25,10 +25,6 @@ const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 
 const postcssNormalize = require('postcss-normalize');
 
-// barney add
-const ThemeColorReplacer = require('webpack-theme-color-replacer');
-const { colorList, replaceColorKey, replaceColorVal } = require('./replaceColorList');
-
 const appPackageJson = require(paths.appPackageJson);
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
@@ -647,16 +643,6 @@ module.exports = function(webpackEnv) {
                     // The formatter is invoked directly in WebpackDevServerUtils during development
                     formatter: isEnvProduction ? typescriptFormatter : undefined,
                 }),
-            // barney add. cutomer themes.
-            new ThemeColorReplacer({
-                matchColors: replaceColorVal,
-                fileName: 'css/theme-colors-[contenthash:8].css',
-                injectCss: false,
-            }),
-            new webpack.DefinePlugin({
-                'process.env.WEBPACK_VAL_COLOR_LIST': JSON.stringify(colorList),
-                'process.env.WEBPACK_VAL_replaceColorKey': JSON.stringify(replaceColorKey),
-            }),
         ].filter(Boolean),
         // Some libraries import Node modules but don't use them in the browser.
         // Tell Webpack to provide empty mocks for them so importing them works.

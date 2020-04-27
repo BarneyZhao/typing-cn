@@ -1,9 +1,8 @@
-import { Input, Row, Col, Statistic, Button } from 'antd';
+import { Input, Row, Col, Statistic, Button, Spin } from 'antd';
 import { ReloadOutlined } from '@ant-design/icons';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 import { storeConnect, MapState, MapDispatch } from '@/store/index';
-import './Home.less';
 import WORDS, { Word } from '@/words';
 
 const { Countdown } = Statistic;
@@ -26,6 +25,7 @@ const getWords = (mode: string, propWords: Word[]) => {
 };
 
 const Home: React.FC<MapState & MapDispatch> = (props) => {
+    const [loading, setLoading] = useState(true);
     const [deadline, setDeadline] = useState(0);
     const [actingWordIndex, setActingWordIndex] = useState(0);
     const [wordArr, setWordArr] = useState<Array<Word & { isCorrect: boolean | null }>>([]);
@@ -164,15 +164,17 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
             props.$state.root.wordsMode,
             props.$state.root.customerWords
         );
-        reloadBtn();
+        setTimeout(() => {
+            reloadBtn();
+            setLoading(false);
+        }, 1000);
     }, [props.$state.root.wordsMode, props.$state.root.customerWords, reloadBtn]);
 
     useEffect(() => {
-        reloadBtn();
         window.addEventListener('keyup', () => {
             keystrokeCountRef.current += 1;
         });
-    }, [reloadBtn]);
+    }, []);
 
     return (
         <div className="home">
@@ -180,29 +182,31 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
                 <Col flex="450px" className={`home-scale-box-${props.$state.root.uiScale}`}>
                     <div className="home-show-main">
                         {typingEnd && <div className="type-end"></div>}
-                        <div className="home-show-main-window" ref={mainWindowEl}>
-                            <Row gutter={12}>
-                                {wordArr.map((item, index) => (
-                                    <Col
-                                        key={index}
-                                        className={`${item.isCorrect === true ? 'correct' : ''} ${
-                                            item.isCorrect === false ? 'incorrect' : ''
-                                        }`}
-                                    >
-                                        <div
-                                            className={`home-show-main-window--label ${
-                                                actingWordIndex === index ? 'acting' : ''
-                                            }`}
+                        <Spin spinning={loading} delay={50} wrapperClassName="loading-wrapper">
+                            <div className="home-show-main-window" ref={mainWindowEl}>
+                                <Row gutter={12}>
+                                    {wordArr.map((item, index) => (
+                                        <Col
+                                            key={index}
+                                            className={`${
+                                                item.isCorrect === true ? 'correct' : ''
+                                            } ${item.isCorrect === false ? 'incorrect' : ''}`}
                                         >
-                                            {item.label}
-                                        </div>
-                                        <div className="home-show-main-window--text">
-                                            {item.text}
-                                        </div>
-                                    </Col>
-                                ))}
-                            </Row>
-                        </div>
+                                            <div
+                                                className={`home-show-main-window--label ${
+                                                    actingWordIndex === index ? 'acting' : ''
+                                                }`}
+                                            >
+                                                {item.label}
+                                            </div>
+                                            <div className="home-show-main-window--text">
+                                                {item.text}
+                                            </div>
+                                        </Col>
+                                    ))}
+                                </Row>
+                            </div>
+                        </Spin>
                     </div>
                     <Row justify="space-between" align="middle" gutter={0}>
                         <Col flex="285px">

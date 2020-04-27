@@ -1,7 +1,6 @@
-@import (reference) '~@/style/variable.less';
 .home {
     & > div {
-        height: calc(100vh - 200px);
+        height: calc(100vh - 300px);
     }
     .home-scale-box-m {
         transform: scale(1.2) translateY(10%);
@@ -91,8 +90,12 @@
     &-reload-btn {
         height: 50px;
         width: 50px;
-        &:focus {
+        background-color: @primary-color;
+        border-color: @primary-color;
+        &:hover,&:focus {
             box-shadow: 0 0 0 5px @home-el-focus-color;
+            background-color: lighten(@primary-color, 0.1);
+            border-color: lighten(@primary-color, 0.1);
         }
         span {
             color: @text-color-bright;
@@ -102,6 +105,9 @@
         }
     }
     .home-type-result {
+        position: absolute;
+        left: 0;
+        bottom: -100%;
         color: @text-color-bright;
         .result-wpm {
             text-align: center;
