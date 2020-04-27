@@ -10,6 +10,16 @@ object-assign
 @license MIT
 */
 
+/**
+ * Less - Leaner CSS v3.11.1
+ * http://lesscss.org
+ * 
+ * Copyright (c) 2009-2020, Alexis Sellier <self@cloudhead.net>
+ * Licensed under the Apache-2.0 License.
+ *
+ * @license Apache-2.0
+ */
+
 /** @license React v16.13.1
  * react.production.min.js
  *
@@ -53,4 +63,11 @@ object-assign
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
+ */
+
+/*!
+ * The buffer module from node.js, for the browser.
+ *
+ * @author   Feross Aboukhadijeh <http://feross.org>
+ * @license  MIT
  */
