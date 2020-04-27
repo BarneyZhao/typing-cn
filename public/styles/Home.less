@@ -10,6 +10,9 @@
     }
     &-show-main {
         padding-bottom: 10px;
+        .ant-spin-dot-item {
+            background-color: @primary-color;
+        }
         .type-end{
             position: relative;
                 &::before {
@@ -68,6 +71,9 @@
         &:focus {
             box-shadow: 0 0 0 6px @home-el-focus-color;
         }
+        &:hover, &:focus {
+            border-color: @primary-color;
+        }
     }
     &-countdown {
         cursor: pointer;
@@ -98,7 +104,7 @@
             border-color: lighten(@primary-color, 0.1);
         }
         span {
-            color: @text-color-bright;
+            color: @reload-btn-color;
             font-size: 26px;
             position: relative;
             top: 2px;

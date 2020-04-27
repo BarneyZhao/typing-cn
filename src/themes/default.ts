@@ -9,7 +9,8 @@ export default {
     '@text-color-bright': '#fffffe',
     '@home-window-back-color': '#fffffd',
     '@home-window-text-color': '#141414',
-    '@home-window-text-acting-back-color': '0, 0, 0, 0.26',
-    '@home-el-focus-color': '224, 237, 249, 0.21',
+    '@home-window-text-acting-back-color': 'rgba(0, 0, 0, 0.26)',
+    '@home-el-focus-color': 'rgba(224, 237, 249, 0.21)',
     '@home-countdown-back-color': '#666666',
+    '@reload-btn-color': '#fffffe',
 } as any;

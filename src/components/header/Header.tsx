@@ -6,7 +6,7 @@ import { storeConnect, MapState, MapDispatch } from '@/store/index';
 import WORDS from '@/words';
 import { getPinyin } from '@/utils/pinyin';
 
-import themeList, { changeColor } from '@/style/themes';
+import themeList, { changeColor } from '@/themes';
 
 const reg = /^[\u2E80-\u9FFF]+$/;
 const defaultWordStr = WORDS.map((item) => item.label).join('|');
