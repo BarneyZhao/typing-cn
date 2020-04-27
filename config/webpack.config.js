@@ -27,6 +27,7 @@ const postcssNormalize = require('postcss-normalize');
 
 // barney add
 const ThemeColorReplacer = require('webpack-theme-color-replacer');
+const { colorList, replaceColorKey, replaceColorVal } = require('./replaceColorList');
 
 const appPackageJson = require(paths.appPackageJson);
 
@@ -648,19 +649,13 @@ module.exports = function(webpackEnv) {
                 }),
             // barney add. cutomer themes.
             new ThemeColorReplacer({
-                matchColors: [
-                    '#1890ff', // @primary-color
-                    '#40a9ff', // ant-hover-color
-                    '#282c34', // @body-back-color
-                    '#fffffe', // @text-color-bright
-                    '#fffffd', // @home-window-back-color
-                    '#141414', // @home-window-text-color
-                    '0, 0, 0, 0.26', // @home-window-text-acting-back-color
-                    '224, 237, 249, 0.21', // @home-el-focus-color
-                    '#666666', // @home-countdown-back-color
-                ],
+                matchColors: replaceColorVal,
                 fileName: 'css/theme-colors-[contenthash:8].css',
                 injectCss: false,
+            }),
+            new webpack.DefinePlugin({
+                'process.env.WEBPACK_VAL_COLOR_LIST': JSON.stringify(colorList),
+                'process.env.WEBPACK_VAL_replaceColorKey': JSON.stringify(replaceColorKey),
             }),
         ].filter(Boolean),
         // Some libraries import Node modules but don't use them in the browser.
