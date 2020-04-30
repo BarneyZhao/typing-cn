@@ -1,4 +1,4 @@
-import { Input, Row, Col, Statistic, Button, Spin } from 'antd';
+import { Input, Row, Col, Statistic, Button, Spin, Popover, InputNumber } from 'antd';
 import { ReloadOutlined } from '@ant-design/icons';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
@@ -23,6 +23,11 @@ const getWords = (mode: string, propWords: Word[]) => {
         return WORDS;
     }
 };
+const getCountdownStr = (value: number) => {
+    const minutes = Math.floor(value / 60);
+    const secs = value % 60;
+    return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+};
 
 const Home: React.FC<MapState & MapDispatch> = (props) => {
     const [loading, setLoading] = useState(true);
@@ -43,9 +48,12 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
     const timeStartRef = useRef(false);
     const oneLineHeightRef = useRef(53);
     const keystrokeCountRef = useRef(0);
+    const countdownTimeRef = useRef(parseInt(props.$state.root.countdownTime, 10));
+    const [deadlineText, setDeadlineText] = useState(getCountdownStr(countdownTimeRef.current));
 
     const countDownStart = () => {
-        setDeadline(Date.now() + 60 * 1000);
+        const time = countdownTimeRef.current;
+        setDeadline(Date.now() + time * 1000);
     };
     const pushWordToArr = (isInit?: boolean) => {
         setWordArr((arr) => {
@@ -69,6 +77,18 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
         });
         return isCorrect;
     };
+    const inputCountdownTime = (value?: number) => {
+        if (value && /^\d+$/g.test(String(value))) {
+            countdownTimeRef.current = value;
+            setDeadlineText(getCountdownStr(value));
+        }
+    };
+    const onCountdonwFinish = () => {
+        if (timeStartRef.current) {
+            setTypingEnd(true);
+            console.log(wordArr);
+        }
+    };
     const reloadBtn = useCallback(() => {
         lineIndexLockRef.current = false;
         lineCountRef.current = 0;
@@ -81,12 +101,6 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
         pushWordToArr(true);
         (mainInputEl.current as any).focus();
     }, []);
-    const onCountdonwFinish = () => {
-        if (timeStartRef.current) {
-            setTypingEnd(true);
-            console.log(wordArr);
-        }
-    };
 
     useEffect(() => {
         if (mainWindowEl) {
@@ -221,14 +235,43 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
                             ></Input>
                         </Col>
                         <Col flex="90px">
-                            <Countdown
-                                className={`home-countdown ${
-                                    !timeStartRef.current ? 'time-ready' : ''
-                                }`}
-                                value={deadline}
-                                format="m:ss"
-                                onFinish={onCountdonwFinish}
-                            ></Countdown>
+                            <Popover
+                                content={
+                                    <div>
+                                        <InputNumber
+                                            defaultValue={countdownTimeRef.current}
+                                            onChange={inputCountdownTime}
+                                        ></InputNumber>
+                                        <span>秒</span>
+                                    </div>
+                                }
+                                onVisibleChange={() =>
+                                    props.$dispatch(
+                                        'setCountdownTime',
+                                        String(countdownTimeRef.current)
+                                    )
+                                }
+                                overlayClassName="home-countdown-popover"
+                                placement="bottom"
+                                title=""
+                                trigger="click"
+                            >
+                                <div className="home-countdown">
+                                    <Countdown
+                                        className="home-countdown-main"
+                                        value={deadline}
+                                        format="m:ss"
+                                        onFinish={onCountdonwFinish}
+                                    ></Countdown>
+                                    <div
+                                        className={`home-countdown-placeholder ${
+                                            timeStartRef.current ? 'time-run' : ''
+                                        }`}
+                                    >
+                                        {deadlineText}
+                                    </div>
+                                </div>
+                            </Popover>
                         </Col>
                         <Col flex="50px">
                             <Button

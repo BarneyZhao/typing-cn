@@ -1,6 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Row, Col, Button, Radio, Modal, Tabs, Input, Tooltip } from 'antd';
 import { SettingOutlined, AppstoreOutlined } from '@ant-design/icons';
+import { useLocation } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 import { storeConnect, MapState, MapDispatch } from '@/store/index';
 import WORDS from '@/words';
@@ -22,6 +23,8 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
             : defaultWordStr
     );
     const [errorWordList, setErrorWordList] = useState<string[]>([]);
+
+    const { hash } = useLocation();
 
     const onUiSizeChange = (evt: any) => {
         props.$dispatch('setUiScale', evt.target.value);
@@ -60,6 +63,24 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
     const onTextInput = (evt: any) => {
         setWords(evt.target.value);
     };
+    const themeBlockClick = (theme: any) => {
+        window.location.hash = '';
+        props.$dispatch('setUiTheme', theme.name);
+    };
+
+    useEffect(() => {
+        if (hash) {
+            const themeObj = themeList.find((th) => th.name === hash.slice(1).replace('-', ' '));
+            if (themeObj) {
+                changeColor(themeObj);
+            }
+        } else if (props.$state.root.uiTheme) {
+            const themeObj = themeList.find((th) => th.name === props.$state.root.uiTheme);
+            if (themeObj) {
+                changeColor(themeObj);
+            }
+        }
+    }, [hash, props.$state.root.uiTheme]);
 
     return (
         <div className="app-header">
@@ -71,7 +92,7 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
                         icon={<SettingOutlined />}
                         onClick={() => setSettingModalVisible(true)}
                     >
-                        设置
+                        词组设置
                     </Button>
                     <Button
                         type="link"
@@ -157,7 +178,7 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
                                 backgroundColor: theme['@body-back-color'],
                                 color: theme.textColor || theme['@primary-color'],
                             }}
-                            onClick={() => changeColor(theme)}
+                            onClick={() => themeBlockClick(theme)}
                         >
                             {theme.name}
                         </Col>

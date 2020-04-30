@@ -12,7 +12,7 @@ const router: React.FC<Props> = (routeProps) => (
     <Router basename={process.env.REACT_APP_DOMAIN}>
         {routeProps.header}
         <div className={routeProps.mainClass}>
-            <Suspense fallback={<div>main page loading...</div>}>
+            <Suspense fallback={<div></div>}>
                 <Switch>
                     {routes.map((route, i) => (
                         <Route
@@ -25,7 +25,7 @@ const router: React.FC<Props> = (routeProps) => (
                                         ? React.createElement(route.component, props)
                                         : ''}
                                     {route.children && route.children.length > 0 && (
-                                        <Suspense fallback={<div>child loading...</div>}>
+                                        <Suspense fallback={<div></div>}>
                                             <Switch>
                                                 {route.children.map((child, j) => (
                                                     <Route
