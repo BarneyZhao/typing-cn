@@ -1,6 +1,6 @@
 export default {
     name: 'avocado',
-    textColor: '#2e2f33',
+    textColor: 'rgb(239,234,155)',
     '@primary-color': 'rgb(52,31,35)',
     '@link-color': 'rgb(52,31,35)',
     '@body-back-color': 'rgb(101,145,91)',
