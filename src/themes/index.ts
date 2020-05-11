@@ -13,7 +13,11 @@ export const changeColor = (themeObj: any) => {
     const temp = { ...themeObj };
     delete temp.name;
     delete temp.textColor;
-    less.modifyVars(Object.assign({}, def, temp));
+    // less.options.async = true;
+    // less.modifyVars(Object.assign({}, def, temp));
+    less.refresh().then(() => {
+        less.modifyVars(Object.assign({}, def, temp));
+    });
 };
 
 export default [
