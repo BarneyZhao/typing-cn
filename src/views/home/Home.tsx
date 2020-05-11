@@ -286,7 +286,11 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
                         <Row className="home-type-result">
                             <Col span={24}>
                                 <div className="result-wpm">
-                                    {wordArr.filter((word) => word.isCorrect !== null).length} WPM
+                                    {Math.round(
+                                        wordArr.filter((word) => word.isCorrect !== null).length /
+                                            (countdownTimeRef.current / 60)
+                                    )}
+                                    WPM
                                 </div>
                             </Col>
                             <Col span={12}>

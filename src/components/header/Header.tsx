@@ -69,8 +69,11 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
     };
 
     useEffect(() => {
+        console.log(hash);
         if (hash) {
             const themeObj = themeList.find((th) => th.name === hash.slice(1).replace('-', ' '));
+            console.log(themeObj);
+
             if (themeObj) {
                 changeColor(themeObj);
             }
