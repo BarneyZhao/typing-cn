@@ -8,6 +8,8 @@ import godspeed from './godspeed';
 import nautilus from './nautilus';
 // import yellowLine from './yellowLine';
 import avocado from './avocado';
+import t2600 from './2600';
+import konmomo from './konmomo';
 
 export const changeColor = (themeObj: any) => {
     const temp = { ...themeObj };
@@ -30,4 +32,6 @@ export default [
     { ...nautilus },
     // { ...yellowLine },
     { ...avocado },
+    { ...t2600 },
+    { ...konmomo },
 ];

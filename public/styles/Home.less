@@ -41,17 +41,22 @@
             height: 116px;
             overflow: hidden;
             user-select: none;
-            .correct {
-                color: @success-color;
-            }
-            .incorrect {
-                color: @error-color;
+            &-item {
+                z-index: 1;
+                &.correct {
+                    color: @success-color;
+                    opacity: @success-opacity;
+                }
+                &.incorrect {
+                    color: @error-color;
+                }
             }
             &--label {
                 font-size: 14px;
                 text-align: center;
                 position: relative;
                 top: 10px;
+                color: @home-window-text-sub-color;
                 &.acting:before {
                     content: "";
                     position: absolute;
@@ -61,6 +66,7 @@
                     height: 42px;
                     background-color: @home-window-text-acting-back-color;
                     border-radius: 4px;
+                    z-index: -1;
                 }
             }
         }

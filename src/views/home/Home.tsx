@@ -202,7 +202,7 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
                                     {wordArr.map((item, index) => (
                                         <Col
                                             key={index}
-                                            className={`${
+                                            className={`home-show-main-window-item ${
                                                 item.isCorrect === true ? 'correct' : ''
                                             } ${item.isCorrect === false ? 'incorrect' : ''}`}
                                         >
