@@ -99,8 +99,15 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
         setActingWordIndex(0);
         wordsBaseRef.current = shuffle(wordsBaseRef.current);
         pushWordToArr(true);
-        (mainInputEl.current as any).focus();
+        setTimeout(() => {
+            (mainInputEl.current as any).focus();
+        }, 10);
     }, []);
+    const mainInputKeyUp = (evt: React.KeyboardEvent) => {
+        if (evt.keyCode === 13) reloadBtn();
+        if (typingEnd) return;
+        keystrokeCountRef.current += 1;
+    };
 
     useEffect(() => {
         if (mainWindowEl) {
@@ -130,6 +137,7 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
     }, [wordArr.length]);
 
     useEffect(() => {
+        if (typingEnd) return;
         if (wordInput === '') {
             setWordArr((arr) => {
                 const tempArr = [...arr];
@@ -171,7 +179,7 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
                 return tempArr;
             });
         }
-    }, [actingWordIndex, wordInput]);
+    }, [actingWordIndex, typingEnd, wordInput]);
 
     useEffect(() => {
         wordsBaseRef.current = getWords(
@@ -183,12 +191,6 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
             setLoading(false);
         }, 1000);
     }, [props.$state.root.wordsMode, props.$state.root.customerWords, reloadBtn]);
-
-    useEffect(() => {
-        window.addEventListener('keyup', () => {
-            keystrokeCountRef.current += 1;
-        });
-    }, []);
 
     return (
         <div className="home">
@@ -228,10 +230,10 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
                                 className="home-input"
                                 ref={mainInputEl}
                                 value={wordInput}
-                                disabled={typingEnd}
                                 onChange={(evt) => {
                                     setWordInput(evt.target.value);
                                 }}
+                                onKeyUp={mainInputKeyUp}
                             ></Input>
                         </Col>
                         <Col flex="90px">
