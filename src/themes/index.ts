@@ -1,4 +1,3 @@
-import less from 'less';
 import def from './default';
 import carbon from './carbon';
 import olivia from './olivia';
@@ -15,10 +14,8 @@ export const changeColor = (themeObj: any) => {
     const temp = { ...themeObj };
     delete temp.name;
     delete temp.textColor;
-    // less.options.async = true;
-    // less.modifyVars(Object.assign({}, def, temp));
-    less.refresh().then(() => {
-        less.modifyVars(Object.assign({}, def, temp));
+    Object.entries<string>(Object.assign({}, def, temp)).forEach(([k, v]) => {
+        document.body.style.setProperty(k, v);
     });
 };
 

@@ -3,6 +3,8 @@ import { Row, Col, Button, Radio, Modal, Tabs, Input, Tooltip } from 'antd';
 import { SettingOutlined, AppstoreOutlined } from '@ant-design/icons';
 import { useLocation } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
+
+import './Header.less';
 import { storeConnect, MapState, MapDispatch } from '@/store/index';
 import WORDS from '@/words';
 import { getPinyin } from '@/utils/pinyin';
@@ -175,8 +177,8 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
                             className="theme-display-block"
                             key={index}
                             style={{
-                                backgroundColor: theme['@body-back-color'],
-                                color: theme.textColor || theme['@primary-color'],
+                                backgroundColor: theme['--body-back-color'],
+                                color: theme.textColor || theme['--primary-color'],
                             }}
                             onClick={() => themeBlockClick(theme)}
                         >

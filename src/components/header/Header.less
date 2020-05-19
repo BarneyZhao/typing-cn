@@ -2,11 +2,11 @@
     padding: 10px;
     .ant-btn-link.ant-btn-background-ghost,
     .radio-text, .ant-radio-wrapper {
-        color: @text-color-bright;
+        color: var(--text-color-bright);
         .ant-radio-inner {
-            border-color: @primary-color;
+            border-color: var(--primary-color);
             &::after {
-                background-color: @primary-color;
+                background-color: var(--primary-color);
             }
         }
     }
@@ -15,45 +15,47 @@
 .header-modal--words-length {
     text-align: right;
     .error-word {
-        color: @error-color;
+        color: var(--error-color);
     }
 }
 .header-modal-confirm-btn {
-    background-color: @body-back-color;
-    border-color: @body-back-color;
+    background-color: var(--body-back-color);
+    border-color: var(--body-back-color);
     &:hover,&:focus {
-        background-color: lighten(@body-back-color, 0.5);
-        border-color: lighten(@body-back-color, 0.5);
+        background-color: var(--body-back-color);
+        border-color: var(--body-back-color);
+        filter: brightness(1.5);
     }
     span {
-        color: @text-color-bright;
+        color: var(--text-color-bright);
     }
 }
 .header-modal-setting {
     .ant-modal-content {
-        background-color: @home-window-back-color;
+        background-color: var(--home-window-back-color);
         .ant-tabs-nav {
-            color: @home-window-text-color;
+            color: var(--home-window-text-color);
             .ant-tabs-tab:hover {
-                color: lighten(@primary-color, 0.5);
+                color: var(--home-window-text-color);
+                filter: brightness(1.5);
             }
             .ant-tabs-tab-active {
-                color: @primary-color;
+                color: var(--primary-color);
             }
         }
         .ant-tabs-ink-bar {
-            background-color: @primary-color;
+            background-color: var(--primary-color);
         }
         .header-modal--total {
-            color: @home-window-text-color;
+            color: var(--home-window-text-color);
         }
     }
 }
 .header-modal-theme{
     .ant-modal-content {
-        background-color: @home-window-back-color;
+        background-color: var(--home-window-back-color);
         .ant-modal-close-x {
-            color: @primary-color;
+            color: var(--primary-color);
         }
     }
     &--box {

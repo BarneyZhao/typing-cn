@@ -11,7 +11,7 @@
     &-show-main {
         padding-bottom: 10px;
         .ant-spin-dot-item {
-            background-color: @primary-color;
+            background-color: var(--primary-color);
         }
         .type-end{
             position: relative;
@@ -24,7 +24,7 @@
                 top: 4px;
                 left: 5px;
                 background-color: grey;
-                color: @text-color-bright;
+                color: var(--text-color-bright);
                 border-radius: 4px;
                 opacity: .8;
                 height: 110px;
@@ -35,8 +35,8 @@
         &-window {
             padding: 0 8px 10px 12px;
             font-size: 20px;
-            background-color: @home-window-back-color;
-            color: @home-window-text-color;
+            background-color: var(--home-window-back-color);
+            color: var(--home-window-text-color);
             border-radius: 4px;
             height: 116px;
             overflow: hidden;
@@ -44,11 +44,11 @@
             &-item {
                 z-index: 1;
                 &.correct {
-                    color: @success-color;
-                    opacity: @success-opacity;
+                    color: var(--success-color);
+                    opacity: var(--success-opacity);
                 }
                 &.incorrect {
-                    color: @error-color;
+                    color: var(--error-color);
                 }
             }
             &--label {
@@ -56,7 +56,7 @@
                 text-align: center;
                 position: relative;
                 top: 10px;
-                color: @home-window-text-sub-color;
+                color: var(--home-window-text-sub-color);
                 &.acting:before {
                     content: "";
                     position: absolute;
@@ -64,7 +64,7 @@
                     top: 0;
                     width: 112%;
                     height: 42px;
-                    background-color: @home-window-text-acting-back-color;
+                    background-color: var(--home-window-text-acting-back-color);
                     border-radius: 4px;
                     z-index: -1;
                 }
@@ -75,21 +75,21 @@
         line-height: 2;
         font-size: 20px;
         &:focus {
-            box-shadow: 0 0 0 6px @home-el-focus-color;
+            box-shadow: 0 0 0 6px var(--home-el-focus-color);
         }
         &:hover, &:focus {
-            border-color: @primary-color;
+            border-color: var(--primary-color);
         }
     }
     &-countdown {
         cursor: pointer;
         &-main {
-            background-color: @home-countdown-back-color;
+            background-color: var(--home-countdown-back-color);
             border-radius: 2px;
             text-align: center;
             padding: 6px 0;
             .ant-statistic-content-value {
-                color: @text-color-bright;
+                color: var(--text-color-bright);
                 position: relative;
             }
         }
@@ -102,8 +102,8 @@
             line-height: 45px;
             text-align: center;
             font-size: 24px;
-            color: @text-color-bright;
-            background-color: @home-countdown-back-color;
+            color: var(--text-color-bright);
+            background-color: var(--home-countdown-back-color);
             &.time-run {
                 display: none;
             }
@@ -112,15 +112,16 @@
     &-reload-btn {
         height: 50px;
         width: 50px;
-        background-color: @primary-color;
-        border-color: @primary-color;
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
         &:hover,&:focus {
-            box-shadow: 0 0 0 5px @home-el-focus-color;
-            background-color: lighten(@primary-color, 0.1);
-            border-color: lighten(@primary-color, 0.1);
+            box-shadow: 0 0 0 5px var(--home-el-focus-color);
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            filter: brightness(1.1)
         }
         span {
-            color: @reload-btn-color;
+            color: var(--reload-btn-color);
             font-size: 26px;
             position: relative;
             top: 2px;
@@ -130,7 +131,7 @@
         position: absolute;
         left: 0;
         bottom: -100%;
-        color: @text-color-bright;
+        color: var(--text-color-bright);
         .result-wpm {
             text-align: center;
             font-size: 40px;
@@ -144,10 +145,10 @@
             padding-right: 20px;
             text-align: right;
             &.correct {
-                color: @success-color;
+                color: var(--success-color);
             }
             &.wrong {
-                color: @error-color;
+                color: var(--error-color);
             }
         }
     }
@@ -157,7 +158,7 @@
         width: 70px;
         margin-right: 10px;
         &:focus, &:hover {
-            border-color: @primary-color;
+            border-color: var(--primary-color);
         }
     }
 }

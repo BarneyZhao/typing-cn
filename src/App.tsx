@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-// import 'antd/dist/antd.css';
+import 'antd/dist/antd.css';
 import './App.less';
 import AppRouter from './router';
 import store from './store';

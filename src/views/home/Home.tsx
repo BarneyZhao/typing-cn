@@ -2,6 +2,7 @@ import { Input, Row, Col, Statistic, Button, Spin, Popover, InputNumber } from '
 import { ReloadOutlined } from '@ant-design/icons';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
+import './Home.less';
 import { storeConnect, MapState, MapDispatch } from '@/store/index';
 import WORDS, { Word } from '@/words';
 
