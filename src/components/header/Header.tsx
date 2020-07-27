@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Row, Col, Button, Radio, Modal, Tabs, Input, Tooltip } from 'antd';
 import { SettingOutlined, AppstoreOutlined } from '@ant-design/icons';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 
 import './Header.less';
@@ -27,6 +27,7 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
     const [errorWordList, setErrorWordList] = useState<string[]>([]);
 
     const { hash } = useLocation();
+    const history = useHistory();
 
     const onUiSizeChange = (evt: any) => {
         props.$dispatch('setUiScale', evt.target.value);
@@ -70,6 +71,10 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
         props.$dispatch('setUiTheme', theme.name);
     };
 
+    const go = (route: string) => {
+        history.push(route);
+    };
+
     useEffect(() => {
         if (hash) {
             const themeObj = themeList.find((th) => th.name === hash.slice(1).replace('-', ' '));
@@ -110,6 +115,14 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
                         <Radio value="m">大</Radio>
                         <Radio value="l">特大</Radio>
                     </Radio.Group>
+                    <Button
+                        type="link"
+                        ghost
+                        icon={<AppstoreOutlined />}
+                        onClick={() => go('test')}
+                    >
+                        test
+                    </Button>
                 </Col>
             </Row>
             <Modal
