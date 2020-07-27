@@ -1,25 +1,28 @@
 {
   "files": {
     "main.css": "/typing-cn/static/css/main.06227ee9.chunk.css",
-    "main.js": "/typing-cn/static/js/main.f6771d20.chunk.js",
-    "main.js.map": "/typing-cn/static/js/main.f6771d20.chunk.js.map",
-    "runtime-main.js": "/typing-cn/static/js/runtime-main.f53856fb.js",
-    "runtime-main.js.map": "/typing-cn/static/js/runtime-main.f53856fb.js.map",
+    "main.js": "/typing-cn/static/js/main.a7bdd50c.chunk.js",
+    "main.js.map": "/typing-cn/static/js/main.a7bdd50c.chunk.js.map",
+    "runtime-main.js": "/typing-cn/static/js/runtime-main.1de999eb.js",
+    "runtime-main.js.map": "/typing-cn/static/js/runtime-main.1de999eb.js.map",
     "static/css/2.4af70dfe.chunk.css": "/typing-cn/static/css/2.4af70dfe.chunk.css",
-    "static/js/2.b0083056.chunk.js": "/typing-cn/static/js/2.b0083056.chunk.js",
-    "static/js/2.b0083056.chunk.js.map": "/typing-cn/static/js/2.b0083056.chunk.js.map",
+    "static/js/2.2384a585.chunk.js": "/typing-cn/static/js/2.2384a585.chunk.js",
+    "static/js/2.2384a585.chunk.js.map": "/typing-cn/static/js/2.2384a585.chunk.js.map",
+    "static/js/3.72ec0052.chunk.js": "/typing-cn/static/js/3.72ec0052.chunk.js",
+    "static/js/3.72ec0052.chunk.js.map": "/typing-cn/static/js/3.72ec0052.chunk.js.map",
     "index.html": "/typing-cn/index.html",
-    "precache-manifest.0217b78edc17041c608be7bc6035516c.js": "/typing-cn/precache-manifest.0217b78edc17041c608be7bc6035516c.js",
+    "precache-manifest.49803947ece286101cc0b58c34b479b0.js": "/typing-cn/precache-manifest.49803947ece286101cc0b58c34b479b0.js",
     "service-worker.js": "/typing-cn/service-worker.js",
     "static/css/2.4af70dfe.chunk.css.map": "/typing-cn/static/css/2.4af70dfe.chunk.css.map",
     "static/css/main.06227ee9.chunk.css.map": "/typing-cn/static/css/main.06227ee9.chunk.css.map",
-    "static/js/2.b0083056.chunk.js.LICENSE": "/typing-cn/static/js/2.b0083056.chunk.js.LICENSE"
+    "static/js/2.2384a585.chunk.js.LICENSE": "/typing-cn/static/js/2.2384a585.chunk.js.LICENSE",
+    "static/media/beep.mp3": "/typing-cn/static/media/beep.01fd8a9c.mp3"
   },
   "entrypoints": [
-    "static/js/runtime-main.f53856fb.js",
+    "static/js/runtime-main.1de999eb.js",
     "static/css/2.4af70dfe.chunk.css",
-    "static/js/2.b0083056.chunk.js",
+    "static/js/2.2384a585.chunk.js",
     "static/css/main.06227ee9.chunk.css",
-    "static/js/main.f6771d20.chunk.js"
+    "static/js/main.a7bdd50c.chunk.js"
   ]
 }
