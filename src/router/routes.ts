@@ -1,17 +1,20 @@
 import { lazy } from 'react';
 import { RouteProps } from 'react-router-dom';
-import Home from '@/views/home/Home';
 
 const routes: Array<RouteProps & { children?: Array<RouteProps> }> = [
     {
         path: '/',
-        component: Home,
-        // component: lazy(() => import('@/views/home/Home')),
+        component: lazy(() => import('@/views/home/Home')),
         exact: true,
     },
     {
         path: '/test',
         component: lazy(() => import('@/views/test/Test')),
+        exact: true,
+    },
+    {
+        path: '/about',
+        component: lazy(() => import('@/views/about/About')),
         exact: true,
     },
     // {

@@ -1,6 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Row, Col, Button, Radio, Modal, Tabs, Input, Tooltip } from 'antd';
-import { SettingOutlined, AppstoreOutlined } from '@ant-design/icons';
+import { Row, Col, Button, Radio, Modal, Tabs, Input, Tooltip, Popover } from 'antd';
+import {
+    SettingOutlined,
+    AppstoreOutlined,
+    InsertRowBelowOutlined,
+    SoundOutlined,
+    SmileOutlined,
+} from '@ant-design/icons';
 import { useLocation, useHistory } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 
@@ -11,8 +17,16 @@ import { getPinyin } from '@/utils/pinyin';
 
 import themeList, { changeColor } from '@/themes';
 
+import DonatePop from '../donatePop/DonatePop';
+
 const reg = /^[\u2E80-\u9FFF]+$/;
 const defaultWordStr = WORDS.map((item) => item.label).join('|');
+
+const ROUTE_HEADER_CONFIG: Record<string, boolean[]> = {
+    '/': [true, true, true],
+    '/test': [true, false, false],
+    '/about': [true, false, false],
+};
 
 const Header: React.FC<MapState & MapDispatch> = (props) => {
     const [settingModalVisible, setSettingModalVisible] = useState(false);
@@ -26,7 +40,7 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
     );
     const [errorWordList, setErrorWordList] = useState<string[]>([]);
 
-    const { hash } = useLocation();
+    const { search, pathname } = useLocation();
     const history = useHistory();
 
     const onUiSizeChange = (evt: any) => {
@@ -67,7 +81,7 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
         setWords(evt.target.value);
     };
     const themeBlockClick = (theme: any) => {
-        window.location.hash = '';
+        window.location.href = window.location.href.split('?')[0];
         props.$dispatch('setUiTheme', theme.name);
     };
 
@@ -76,8 +90,8 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
     };
 
     useEffect(() => {
-        if (hash) {
-            const themeObj = themeList.find((th) => th.name === hash.slice(1).replace('-', ' '));
+        if (search) {
+            const themeObj = themeList.find((th) => th.name === search.slice(1).replace('-', ' '));
             if (themeObj) {
                 changeColor(themeObj);
             }
@@ -87,7 +101,7 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
                 changeColor(themeObj);
             }
         }
-    }, [hash, props.$state.root.uiTheme]);
+    }, [search, props.$state.root.uiTheme]);
 
     return (
         <div className="app-header">
@@ -96,33 +110,66 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
                     <Button
                         type="link"
                         ghost
-                        icon={<SettingOutlined />}
-                        onClick={() => setSettingModalVisible(true)}
+                        icon={<InsertRowBelowOutlined />}
+                        onClick={() => go('')}
                     >
-                        词组设置
+                        小窗限时模式
                     </Button>
+                    {/* <Button type="link" ghost icon={<BellOutlined />} onClick={() => go('test')}>
+                        大窗计时模式
+                    </Button> */}
+                    <Button type="link" ghost icon={<SoundOutlined />} onClick={() => go('test')}>
+                        按键声音反馈
+                    </Button>
+                    <Popover placement="bottomLeft" content={<DonatePop go={go} />}>
+                        <Button
+                            type="link"
+                            ghost
+                            icon={<SmileOutlined />}
+                            onClick={() => go('about')}
+                        >
+                            求打赏
+                        </Button>
+                    </Popover>
+                </Col>
+            </Row>
+            <Row style={{ marginTop: '10px' }}>
+                <Col flex="auto">
                     <Button
                         type="link"
                         ghost
+                        style={{ display: ROUTE_HEADER_CONFIG[pathname][0] ? '' : 'none' }}
                         icon={<AppstoreOutlined />}
                         onClick={() => setThemeModalVisible(true)}
                     >
                         主题
                     </Button>
-                    <span className="radio-text">&nbsp;&nbsp;&nbsp;&nbsp;UI尺寸:&nbsp;&nbsp;</span>
-                    <Radio.Group onChange={onUiSizeChange} defaultValue={props.$state.root.uiScale}>
-                        <Radio value="s">正常</Radio>
-                        <Radio value="m">大</Radio>
-                        <Radio value="l">特大</Radio>
-                    </Radio.Group>
                     <Button
                         type="link"
                         ghost
-                        icon={<AppstoreOutlined />}
-                        onClick={() => go('test')}
+                        style={{ display: ROUTE_HEADER_CONFIG[pathname][1] ? '' : 'none' }}
+                        icon={<SettingOutlined />}
+                        onClick={() => setSettingModalVisible(true)}
                     >
-                        test
+                        词组设置
                     </Button>
+                    <div
+                        style={{
+                            display: ROUTE_HEADER_CONFIG[pathname][2] ? 'inline-block' : 'none',
+                        }}
+                    >
+                        <span className="radio-text">
+                            &nbsp;&nbsp;&nbsp;&nbsp;UI尺寸:&nbsp;&nbsp;
+                        </span>
+                        <Radio.Group
+                            onChange={onUiSizeChange}
+                            defaultValue={props.$state.root.uiScale}
+                        >
+                            <Radio value="s">正常</Radio>
+                            <Radio value="m">大</Radio>
+                            <Radio value="l">特大</Radio>
+                        </Radio.Group>
+                    </div>
                 </Col>
             </Row>
             <Modal
