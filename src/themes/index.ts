@@ -9,6 +9,7 @@ import nautilus from './nautilus';
 import avocado from './avocado';
 import t2600 from './2600';
 import konmomo from './konmomo';
+import spaceCadet from './spaceCadet';
 
 export const changeColor = (themeObj: any) => {
     const temp = { ...themeObj };
@@ -31,4 +32,5 @@ export default [
     { ...avocado },
     { ...t2600 },
     { ...konmomo },
+    { ...spaceCadet },
 ];
