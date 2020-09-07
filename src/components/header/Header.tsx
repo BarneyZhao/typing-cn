@@ -107,27 +107,17 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
         <div className="app-header">
             <Row>
                 <Col flex="auto">
-                    <Button
-                        type="link"
-                        ghost
-                        icon={<InsertRowBelowOutlined />}
-                        onClick={() => go('')}
-                    >
+                    <Button type="link" icon={<InsertRowBelowOutlined />} onClick={() => go('')}>
                         小窗限时模式
                     </Button>
-                    {/* <Button type="link" ghost icon={<BellOutlined />} onClick={() => go('test')}>
+                    {/* <Button type="link" icon={<BellOutlined />} onClick={() => go('test')}>
                         大窗计时模式
                     </Button> */}
-                    <Button type="link" ghost icon={<SoundOutlined />} onClick={() => go('test')}>
+                    <Button type="link" icon={<SoundOutlined />} onClick={() => go('test')}>
                         按键声音反馈
                     </Button>
                     <Popover placement="bottomLeft" content={<DonatePop go={go} />}>
-                        <Button
-                            type="link"
-                            ghost
-                            icon={<SmileOutlined />}
-                            onClick={() => go('about')}
-                        >
+                        <Button type="link" icon={<SmileOutlined />} onClick={() => go('about')}>
                             求打赏
                         </Button>
                     </Popover>
@@ -137,7 +127,6 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
                 <Col flex="auto">
                     <Button
                         type="link"
-                        ghost
                         style={{ display: ROUTE_HEADER_CONFIG[pathname][0] ? '' : 'none' }}
                         icon={<AppstoreOutlined />}
                         onClick={() => setThemeModalVisible(true)}
@@ -146,7 +135,6 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
                     </Button>
                     <Button
                         type="link"
-                        ghost
                         style={{ display: ROUTE_HEADER_CONFIG[pathname][1] ? '' : 'none' }}
                         icon={<SettingOutlined />}
                         onClick={() => setSettingModalVisible(true)}

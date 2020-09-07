@@ -1,4 +1,15 @@
-import { Input, Row, Col, Statistic, Button, Spin, Popover, InputNumber } from 'antd';
+import {
+    Input,
+    Row,
+    Col,
+    Statistic,
+    Button,
+    Spin,
+    Popover,
+    InputNumber,
+    Collapse,
+    Tag,
+} from 'antd';
 import { ReloadOutlined } from '@ant-design/icons';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
@@ -7,6 +18,7 @@ import { storeConnect, MapState, MapDispatch } from '@/store/index';
 import WORDS, { Word } from '@/words';
 
 const { Countdown } = Statistic;
+const { Panel } = Collapse;
 
 const shuffle = (arr: any[]) => {
     for (let i = arr.length - 1; i >= 0; i--) {
@@ -51,6 +63,13 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
     const keystrokeCountRef = useRef(0);
     const countdownTimeRef = useRef(parseInt(props.$state.root.countdownTime, 10));
     const [deadlineText, setDeadlineText] = useState(getCountdownStr(countdownTimeRef.current));
+    const [isHideCharacter, setIsHideCharacter] = useState(false);
+    const typingResultRef = useRef({
+        wpm: 0,
+        correct: 0,
+        wrong: 0,
+        inputWordArr: [] as any[],
+    });
 
     const countDownStart = () => {
         const time = countdownTimeRef.current;
@@ -78,14 +97,21 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
         });
         return isCorrect;
     };
-    const inputCountdownTime = (value?: number) => {
+    const inputCountdownTime = (value?: number | string) => {
         if (value && /^\d+$/g.test(String(value))) {
-            countdownTimeRef.current = value;
-            setDeadlineText(getCountdownStr(value));
+            countdownTimeRef.current = Number(value);
+            setDeadlineText(getCountdownStr(Number(value)));
         }
     };
-    const onCountdonwFinish = () => {
+    const onCountdownFinish = () => {
         if (timeStartRef.current) {
+            const inputWordArr = typingResultRef.current.inputWordArr;
+            typingResultRef.current = {
+                wpm: Math.round(inputWordArr.length / (countdownTimeRef.current / 60)),
+                correct: inputWordArr.filter((word: any) => word.isCorrect === true).length,
+                wrong: inputWordArr.filter((word: any) => word.isCorrect === false).length,
+                inputWordArr,
+            };
             setTypingEnd(true);
             console.log(wordArr);
         }
@@ -102,6 +128,12 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
         pushWordToArr(true);
         setTimeout(() => {
             (mainInputEl.current as any).focus();
+            typingResultRef.current = {
+                wpm: 0,
+                correct: 0,
+                wrong: 0,
+                inputWordArr: [] as any[],
+            };
         }, 10);
     }, []);
     const mainInputKeyUp = (evt: React.KeyboardEvent) => {
@@ -161,6 +193,10 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
                 const isCorrect = checkInputVal(inputArr, targetWord.text);
                 tempArr[actingWordIndex].isCorrect =
                     isCorrect && inputArr.length === targetWord.text.length;
+
+                typingResultRef.current.inputWordArr.push(
+                    Object.assign({ input: inputArr.join('') }, tempArr[actingWordIndex])
+                );
                 return tempArr;
             });
             setActingWordIndex(actingWordIndex + 1);
@@ -197,6 +233,11 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
         <div className="home">
             <Row justify="center" align="middle">
                 <Col flex="450px" className={`home-scale-box-${props.$state.root.uiScale}`}>
+                    <div className="hide-control">
+                        <Button type="link" onClick={() => setIsHideCharacter((v) => !v)}>
+                            {isHideCharacter ? '显示' : '隐藏'}拼音
+                        </Button>
+                    </div>
                     <div className="home-show-main">
                         {typingEnd && <div className="type-end"></div>}
                         <Spin spinning={loading} delay={50} wrapperClassName="loading-wrapper">
@@ -216,7 +257,11 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
                                             >
                                                 {item.label}
                                             </div>
-                                            <div className="home-show-main-window--text">
+                                            <div
+                                                className={`home-show-main-window--text ${
+                                                    isHideCharacter ? 'hide' : ''
+                                                }`}
+                                            >
                                                 {item.text}
                                             </div>
                                         </Col>
@@ -264,7 +309,7 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
                                         className="home-countdown-main"
                                         value={deadline}
                                         format="m:ss"
-                                        onFinish={onCountdonwFinish}
+                                        onFinish={onCountdownFinish}
                                     ></Countdown>
                                     <div
                                         className={`home-countdown-placeholder ${
@@ -285,41 +330,57 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
                             />
                         </Col>
                     </Row>
-                    {typingEnd && (
-                        <Row className="home-type-result">
-                            <Col span={24}>
-                                <div className="result-wpm">
-                                    {Math.round(
-                                        wordArr.filter((word) => word.isCorrect !== null).length /
-                                            (countdownTimeRef.current / 60)
-                                    )}
-                                    WPM
-                                </div>
-                            </Col>
-                            <Col span={12}>
-                                <div className="result-title">正确</div>
-                            </Col>
-                            <Col span={12}>
-                                <div className="result-numbers correct">
-                                    {wordArr.filter((word) => word.isCorrect === true).length}
-                                </div>
-                            </Col>
-                            <Col span={12}>
-                                <div className="result-title">错误</div>
-                            </Col>
-                            <Col span={12}>
-                                <div className="result-numbers wrong">
-                                    {wordArr.filter((word) => word.isCorrect === false).length}
-                                </div>
-                            </Col>
-                            <Col span={12}>
-                                <div className="result-title">按键总数</div>
-                            </Col>
-                            <Col span={12}>
-                                <div className="result-numbers">{keystrokeCountRef.current}</div>
-                            </Col>
-                        </Row>
-                    )}
+                    <div className="home-type-result-container">
+                        {typingEnd && (
+                            <Row className="home-type-result">
+                                <Col span={24}>
+                                    <div className="result-wpm">
+                                        {typingResultRef.current.wpm}
+                                        WPM
+                                    </div>
+                                </Col>
+                                <Col span={12}>
+                                    <div className="result-title">正确</div>
+                                </Col>
+                                <Col span={12}>
+                                    <div className="result-numbers correct">
+                                        {typingResultRef.current.correct}
+                                    </div>
+                                </Col>
+                                <Col span={12}>
+                                    <div className="result-title">错误</div>
+                                </Col>
+                                <Col span={12}>
+                                    <div className="result-numbers wrong">
+                                        {typingResultRef.current.wrong}
+                                    </div>
+                                </Col>
+                                <Col span={12}>
+                                    <div className="result-title">按键总数</div>
+                                </Col>
+                                <Col span={12}>
+                                    <div className="result-numbers">
+                                        {keystrokeCountRef.current}
+                                    </div>
+                                </Col>
+                                <Col span={24}>
+                                    <Collapse ghost={true} className="type-resule-collapse">
+                                        <Panel header="展开此次输入" key="1">
+                                            {typingResultRef.current.inputWordArr.map((w, wi) => (
+                                                <Tag
+                                                    color={w.isCorrect ? 'success' : 'error'}
+                                                    key={wi}
+                                                >
+                                                    <div>{w.label}</div>
+                                                    <div>{w.input}</div>
+                                                </Tag>
+                                            ))}
+                                        </Panel>
+                                    </Collapse>
+                                </Col>
+                            </Row>
+                        )}
+                    </div>
                 </Col>
             </Row>
         </div>
