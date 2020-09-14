@@ -4,7 +4,12 @@ import { RouteProps } from 'react-router-dom';
 const routes: Array<RouteProps & { children?: Array<RouteProps> }> = [
     {
         path: '/',
-        component: lazy(() => import('@/views/home/Home')),
+        component: lazy(() => import('@/views/fingers/Fingers')),
+        exact: true,
+    },
+    {
+        path: '/monkey',
+        component: lazy(() => import('@/views/monkey/Monkey')),
         exact: true,
     },
     {

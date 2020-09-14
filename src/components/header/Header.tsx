@@ -6,6 +6,7 @@ import {
     InsertRowBelowOutlined,
     SoundOutlined,
     SmileOutlined,
+    BellOutlined,
 } from '@ant-design/icons';
 import { useLocation, useHistory } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
@@ -24,6 +25,7 @@ const defaultWordStr = WORDS.map((item) => item.label).join('|');
 
 const ROUTE_HEADER_CONFIG: Record<string, boolean[]> = {
     '/': [true, true, true],
+    '/monkey': [true, true, false],
     '/test': [true, false, false],
     '/about': [true, false, false],
 };
@@ -108,11 +110,11 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
             <Row>
                 <Col flex="auto">
                     <Button type="link" icon={<InsertRowBelowOutlined />} onClick={() => go('')}>
-                        小窗限时模式
+                        模式1(限时)
                     </Button>
-                    {/* <Button type="link" icon={<BellOutlined />} onClick={() => go('test')}>
-                        大窗计时模式
-                    </Button> */}
+                    <Button type="link" icon={<BellOutlined />} onClick={() => go('monkey')}>
+                        模式2(计时)
+                    </Button>
                     <Button type="link" icon={<SoundOutlined />} onClick={() => go('test')}>
                         按键声音反馈
                     </Button>

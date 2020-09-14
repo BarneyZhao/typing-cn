@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
     Input,
     Row,
@@ -11,46 +12,29 @@ import {
     Tag,
 } from 'antd';
 import { ReloadOutlined } from '@ant-design/icons';
-import React, { useState, useEffect, useRef, useCallback } from 'react';
 
-import './Home.less';
+import './Fingers.less';
 import { storeConnect, MapState, MapDispatch } from '@/store/index';
-import WORDS, { Word } from '@/words';
+import wordTool, { WordType } from '@/utils/wordTool';
 
 const { Countdown } = Statistic;
 const { Panel } = Collapse;
 
-const shuffle = (arr: any[]) => {
-    for (let i = arr.length - 1; i >= 0; i--) {
-        let rIndex = Math.floor(Math.random() * (i + 1));
-        let temp = arr[rIndex];
-        arr[rIndex] = arr[i];
-        arr[i] = temp;
-    }
-    return arr;
-};
-const getWords = (mode: string, propWords: Word[]) => {
-    if (mode !== '1' && propWords && propWords.length !== 0) {
-        return propWords;
-    } else {
-        return WORDS;
-    }
-};
 const getCountdownStr = (value: number) => {
     const minutes = Math.floor(value / 60);
     const secs = value % 60;
     return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
 };
 
-const Home: React.FC<MapState & MapDispatch> = (props) => {
+const Fingers: React.FC<MapState & MapDispatch> = (props) => {
     const [loading, setLoading] = useState(true);
     const [deadline, setDeadline] = useState(0);
     const [actingWordIndex, setActingWordIndex] = useState(0);
-    const [wordArr, setWordArr] = useState<Array<Word & { isCorrect: boolean | null }>>([]);
+    const [wordArr, setWordArr] = useState<Array<WordType & { isCorrect: boolean | null }>>([]);
     const [wordInput, setWordInput] = useState('');
     const [typingEnd, setTypingEnd] = useState(false);
     const wordsBaseRef = useRef(
-        getWords(props.$state.root.wordsMode, props.$state.root.customerWords)
+        wordTool.getWords(props.$state.root.wordsMode, props.$state.root.customerWords)
     );
     const mainWindowEl = useRef(null);
     const mainInputEl = useRef(null);
@@ -124,7 +108,7 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
         setTypingEnd(false);
         setWordInput('');
         setActingWordIndex(0);
-        wordsBaseRef.current = shuffle(wordsBaseRef.current);
+        wordsBaseRef.current = wordTool.shuffle(wordsBaseRef.current);
         pushWordToArr(true);
         setTimeout(() => {
             (mainInputEl.current as any).focus();
@@ -219,7 +203,7 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
     }, [actingWordIndex, typingEnd, wordInput]);
 
     useEffect(() => {
-        wordsBaseRef.current = getWords(
+        wordsBaseRef.current = wordTool.getWords(
             props.$state.root.wordsMode,
             props.$state.root.customerWords
         );
@@ -387,4 +371,4 @@ const Home: React.FC<MapState & MapDispatch> = (props) => {
     );
 };
 
-export default storeConnect(Home);
+export default storeConnect(Fingers);
