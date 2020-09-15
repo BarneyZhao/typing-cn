@@ -29,6 +29,8 @@ interface WordObj extends WordType {
 const SPACE_CODE = 32;
 const BACKSPACE_CODE = 8;
 
+const getCurrentWordEl = (mEl: any) => Array.from<any>(mEl.children);
+
 const Monkey: React.FC<MapState & MapDispatch> = (props) => {
     const inputEl = useRef(null);
     const mainEl = useRef(null);
@@ -57,7 +59,7 @@ const Monkey: React.FC<MapState & MapDispatch> = (props) => {
     const setCaret = () => {
         const coordinate = coordinateRef.current; // 此时坐标为下一个字母的坐标
         const mainElRect = (mainEl.current as any).getBoundingClientRect();
-        const currentWordEl = Array.from<any>((mainEl.current as any).children)[coordinate[0]];
+        const currentWordEl = getCurrentWordEl(mainEl.current)[coordinate[0]];
         const currentLetterArr = Array.from<any>(currentWordEl.getElementsByClassName('letter'));
         if (currentLetterArr.length <= coordinate[1]) {
             const letterRect = currentLetterArr[coordinate[1] - 1].getBoundingClientRect();
@@ -87,9 +89,7 @@ const Monkey: React.FC<MapState & MapDispatch> = (props) => {
             } else {
                 if (coordinate[1] >= wordArr[coordinate[0]].letterArr.length) {
                     // 已经是单词最后一位（下标等于长度），却输入了字母
-                    const currentWordEl = Array.from<any>((mainEl.current as any).children)[
-                        coordinate[0]
-                    ];
+                    const currentWordEl = getCurrentWordEl(mainEl.current)[coordinate[0]];
                     const codeEl = document.createElement('code');
                     codeEl.className = 'letter wrong extra-letter';
                     codeEl.innerText = inputVal;
@@ -113,9 +113,7 @@ const Monkey: React.FC<MapState & MapDispatch> = (props) => {
                         _wordArr[coordinate[0]].isSkip = true;
                         _wordArr[coordinate[0]].isCorrect = false;
                     } else {
-                        const currentWordEl = Array.from<any>((mainEl.current as any).children)[
-                            coordinate[0]
-                        ];
+                        const currentWordEl = getCurrentWordEl(mainEl.current)[coordinate[0]];
                         const extraLetterArr = currentWordEl.getElementsByClassName('extra-letter');
                         if (!extraLetterArr || extraLetterArr.length === 0) {
                             _wordArr[coordinate[0]].isCorrect = _wordArr[
@@ -132,9 +130,7 @@ const Monkey: React.FC<MapState & MapDispatch> = (props) => {
                     coordinate[0] === _wordArr.length - 1 &&
                     coordinate[1] === _wordArr[coordinate[0]].letterArr.length - 1
                 ) {
-                    const currentWordEl = Array.from<any>((mainEl.current as any).children)[
-                        coordinate[0]
-                    ];
+                    const currentWordEl = getCurrentWordEl(mainEl.current)[coordinate[0]];
                     const extraLetterArr = currentWordEl.getElementsByClassName('extra-letter');
                     if (!extraLetterArr || extraLetterArr.length === 0) {
                         _wordArr[coordinate[0]].isCorrect = _wordArr[coordinate[0]].letterArr.every(
@@ -194,15 +190,13 @@ const Monkey: React.FC<MapState & MapDispatch> = (props) => {
                     );
                     newCoordinate = [coordinate[0] - 1, lIndex];
                 } else {
-                    const currentWordEl = Array.from<any>((mainEl.current as any).children)[
-                        coordinate[0] - 1
-                    ];
+                    const currentWordEl = getCurrentWordEl(mainEl.current)[coordinate[0] - 1];
                     const currentLetterArr = currentWordEl.getElementsByClassName('letter');
                     newCoordinate = [coordinate[0] - 1, currentLetterArr.length];
                 }
             }
         } else {
-            const currentWordEl = Array.from<any>((mainEl.current as any).children)[coordinate[0]];
+            const currentWordEl = getCurrentWordEl(mainEl.current)[coordinate[0]];
             const extraLetterArr = currentWordEl.getElementsByClassName('extra-letter');
             if (extraLetterArr && extraLetterArr.length > 0) {
                 currentWordEl.removeChild(extraLetterArr[extraLetterArr.length - 1]);
@@ -270,6 +264,12 @@ const Monkey: React.FC<MapState & MapDispatch> = (props) => {
             acc: 0,
             time: { begin: 0, secs: 0 },
         };
+        const extraLetterArr = (mainEl.current as any).getElementsByClassName('extra-letter');
+        if (extraLetterArr.length !== 0) {
+            Array.from<any>(extraLetterArr).forEach((etl) => {
+                etl.parentNode.removeChild(etl);
+            });
+        }
         setWordArr(
             wordTool.jsonCopy<WordType[]>(wordsBaseRef.current.slice(0, wordCount)).map((word) => {
                 return Object.assign({}, word, {
@@ -362,7 +362,7 @@ const Monkey: React.FC<MapState & MapDispatch> = (props) => {
                         onKeyDown={inputKeyDown}
                         onBlur={() => {
                             setIsTyping(false);
-                            setIsCaretFlash(false);
+                            // setIsCaretFlash(false);
                         }}
                         onFocus={() => {
                             setIsTyping(true);
@@ -378,6 +378,14 @@ const Monkey: React.FC<MapState & MapDispatch> = (props) => {
                         />
                     </div>
                     {/* {userInput} */}
+                    <div className={`tip-line ${!isCaretFlash ? 'hide' : ''}`}>
+                        <div>点击词块进入输入状态</div>
+                        <div>输入正确的拼音字母，然后空格</div>
+                        <div>
+                            输入状态下<code>Tab</code>后回车可以直接刷新
+                        </div>
+                        <div>觉得有意思可以打赏一下(#^.^#)(在上面↑↑)</div>
+                    </div>
                 </Col>
                 <Col flex="900px" className={`type-result-box ${showTypeResult ? 'show' : ''}`}>
                     {/* {JSON.stringify(typeResultRef.current)} */}
