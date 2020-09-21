@@ -13,6 +13,7 @@ import t2600 from './2600';
 import konmomo from './konmomo';
 import spaceCadet from './spaceCadet';
 import shoko from './shoko';
+import phYellow from './phYellow';
 
 export const changeColor = (themeObj: any) => {
     const temp = { ...themeObj };
@@ -38,4 +39,5 @@ export default [
     { ...konmomo },
     { ...spaceCadet },
     { ...shoko },
+    { ...phYellow },
 ];
