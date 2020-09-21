@@ -1,3 +1,5 @@
+import site from '@/utils/siteIcon';
+
 import def from './default';
 import carbon from './carbon';
 import olivia from './olivia';
@@ -10,9 +12,11 @@ import avocado from './avocado';
 import t2600 from './2600';
 import konmomo from './konmomo';
 import spaceCadet from './spaceCadet';
+import shoko from './shoko';
 
 export const changeColor = (themeObj: any) => {
     const temp = { ...themeObj };
+    site.setSiteIcon(temp['--body-back-color'], temp.textColor || temp['--primary-color']);
     delete temp.name;
     delete temp.textColor;
     Object.entries<string>(Object.assign({}, def, temp)).forEach(([k, v]) => {
@@ -33,4 +37,5 @@ export default [
     { ...t2600 },
     { ...konmomo },
     { ...spaceCadet },
+    { ...shoko },
 ];

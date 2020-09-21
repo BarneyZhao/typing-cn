@@ -292,8 +292,12 @@ const Monkey: React.FC<MapState & MapDispatch> = (props) => {
     }, [wordCount]);
 
     useEffect(() => {
+        wordsBaseRef.current = wordTool.getWords(
+            props.$state.root.wordsMode,
+            props.$state.root.customerWords
+        );
         reloadWord();
-    }, [reloadWord, wordCount]);
+    }, [props.$state.root.wordsMode, props.$state.root.customerWords, reloadWord, wordCount]);
 
     return (
         <div className="Monkey">

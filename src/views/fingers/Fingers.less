@@ -9,7 +9,7 @@
         transform: scale(1.5) translateY(20%);
     }
     .hide-control > .ant-btn-link {
-        color: var(--text-color-bright);
+        color: var(--head-text-color);
         opacity: 0.5;
         padding-left: 0;
         padding-right: 0;
@@ -30,7 +30,7 @@
                 top: 4px;
                 left: 5px;
                 background-color: grey;
-                color: var(--text-color-bright);
+                color: var(--head-text-color);
                 border-radius: 4px;
                 opacity: 0.8;
                 height: 110px;
@@ -55,6 +55,7 @@
                 }
                 &.incorrect {
                     color: var(--error-color);
+                    opacity: var(--error-opacity);
                 }
             }
             &--label {
@@ -88,7 +89,7 @@
         line-height: 2;
         font-size: 20px;
         &:focus {
-            box-shadow: 0 0 0 6px var(--home-el-focus-color);
+            box-shadow: 0 0 0 6px var(--home-input-focus-color);
         }
         &:hover,
         &:focus {
@@ -103,7 +104,7 @@
             text-align: center;
             padding: 6px 0;
             .ant-statistic-content-value {
-                color: var(--text-color-bright);
+                color: var(--home-countdown-text-color);
                 position: relative;
             }
         }
@@ -116,7 +117,7 @@
             line-height: 45px;
             text-align: center;
             font-size: 24px;
-            color: var(--text-color-bright);
+            color: var(--home-countdown-text-color);
             background-color: var(--home-countdown-back-color);
             &.time-run {
                 display: none;
@@ -126,17 +127,17 @@
     &-reload-btn {
         height: 50px;
         width: 50px;
-        background-color: var(--primary-color);
-        border-color: var(--primary-color);
+        background-color: var(--home-reload-btn-back-color);
+        border-color: var(--home-reload-btn-back-color);
         &:hover,
         &:focus {
-            box-shadow: 0 0 0 5px var(--home-el-focus-color);
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
+            box-shadow: 0 0 0 5px var(--home-reload-btn-focus-color);
+            background-color: var(--home-reload-btn-back-color);
+            border-color: var(--home-reload-btn-back-color);
             filter: brightness(1.1);
         }
         span {
-            color: var(--reload-btn-color);
+            color: var(--home-reload-btn-text-color);
             font-size: 26px;
             position: relative;
             top: 2px;
@@ -150,7 +151,7 @@
         left: 0;
         top: 20px;
         width: 100%;
-        color: var(--text-color-bright);
+        color: var(--head-text-color);
         .result-wpm {
             text-align: center;
             font-size: 40px;
@@ -172,7 +173,7 @@
         }
         .type-resule-collapse {
             .ant-collapse-header {
-                color: var(--text-color-bright);
+                color: var(--head-text-color);
             }
             .ant-tag {
                 text-align: center;

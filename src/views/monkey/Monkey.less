@@ -3,16 +3,16 @@
     .word-count-radio {
         padding: 0 0 30px 30px;
         .ant-radio-button-wrapper {
-            color: var(--text-color-bright);
+            color: var(--head-text-color);
             background-color: transparent;
             border: none;
             opacity: .5;
             &.ant-radio-button-wrapper-checked {
-                color: var(--primary-color);
+                color: var(--word-count-checked-color);
             }
             &:not(:first-child)::before {
                 background-color: transparent;
-                color: var(--text-color-bright);
+                color: var(--head-text-color);
                 content: '/';
             }
         }
@@ -22,7 +22,7 @@
         width: 3px;
         height: 30px;
         border-radius: 10px;
-        background-color: var(--primary-color);
+        background-color: var(--monkey-caret-color);
         animation-iteration-count: infinite;
         animation-duration: 1s;
         transition: transform 250ms;
@@ -50,32 +50,33 @@
         flex-wrap: wrap;
         width: 100%;
         align-content: flex-start;
-        color: var(--text-color-bright);
+        color: var(--head-text-color);
         overflow: hidden;
         user-select: none;
         min-width: 920px;
         .word {
             margin: 7px 7px;
+            opacity: .8;
+            &.correct {
+                color: var(--primary-color);
+                opacity: 1;
+            }
+            &.wrong {
+                color: red;
+                opacity: 1;
+            }
             .label {
                 font-size: 16px;
                 line-height: 16px;
                 text-align: center;
-                opacity: .5;
                 position: relative;
                 top: 3px;
-            }
-            &.correct .label{
-                color: var(--primary-color);
-                opacity: 1;
-            }
-            &.wrong .label{
-                color: red;
-                opacity: 1;
+                color: var(--monkey-sub-color);
             }
             .letter {
                 display: inline-block;
                 width: 14px;
-                opacity: .5;
+                opacity: .6;
                 &.correct {
                     color: var(--primary-color);
                     opacity: 1;
@@ -95,14 +96,14 @@
         margin-top: 50px;
         font-size: 12px;
         text-align: center;
-        color: var(--text-color-bright);
+        color: var(--head-text-color);
         opacity: 0.5;
         transition: opacity 500ms linear;
         code {
             padding: 1px 3px;
             margin: 0 3px;
             border-radius: 2px;
-            background-color: var(--text-color-bright);
+            background-color: var(--head-text-color);
             color: var(--body-back-color);
         }
         &.hide {
@@ -119,7 +120,7 @@
         .label {
             font-size: 20px;
             line-height: 20px;
-            color: var(--text-color-bright);
+            color: var(--head-text-color);
             opacity: .5;
         }
         .show-data {
@@ -140,13 +141,13 @@
             box-shadow: none;
             &:hover,
             &:focus {
-                box-shadow: 0 0 0 5px var(--home-el-focus-color);
+                box-shadow: 0 0 0 5px var(--home-input-focus-color);
                 background-color: var(--body-back-color);
                 border-color: var(--body-back-color);
                 filter: brightness(1.1);
             }
             span {
-                color: var(--text-color-bright);
+                color: var(--head-text-color);
                 opacity: .5;
                 font-size: 26px;
                 position: relative;
