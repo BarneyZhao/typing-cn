@@ -165,26 +165,6 @@ const defaultWords: Word[] = [
         text: 'guolai',
     },
     {
-        label: '虾球',
-        text: 'xiaqiu',
-    },
-    {
-        label: '江湾',
-        text: 'jiangwan',
-    },
-    {
-        label: '江山',
-        text: 'jiangshan',
-    },
-    {
-        label: '富贵',
-        text: 'fugui',
-    },
-    {
-        label: '酸奶',
-        text: 'suannai',
-    },
-    {
         label: '今天',
         text: 'jintian',
     },
@@ -193,20 +173,8 @@ const defaultWords: Word[] = [
         text: 'zhenhao',
     },
     {
-        label: '波波',
-        text: 'bobo',
-    },
-    {
-        label: '耳朵',
-        text: 'erduo',
-    },
-    {
         label: '奥利奥',
         text: 'aoliao',
-    },
-    {
-        label: '胖虎',
-        text: 'panghu',
     },
     {
         label: '键盘',
@@ -257,10 +225,6 @@ const defaultWords: Word[] = [
         text: 'haiwai',
     },
     {
-        label: '浦杉',
-        text: 'pushan',
-    },
-    {
         label: '矩阵',
         text: 'juzhen',
     },
@@ -275,18 +239,6 @@ const defaultWords: Word[] = [
     {
         label: '营地',
         text: 'yingdi',
-    },
-    {
-        label: '葫芦',
-        text: 'hulu',
-    },
-    {
-        label: '天狼星',
-        text: 'tianlangxing',
-    },
-    {
-        label: '稻草人',
-        text: 'daocaoren',
     },
     {
         label: '无限',
@@ -313,8 +265,12 @@ const defaultWords: Word[] = [
         text: 'renwang',
     },
     {
-        label: '怪猎',
-        text: 'guailie',
+        label: '怪物',
+        text: 'guaiwu',
+    },
+    {
+        label: '猎人',
+        text: 'lieren',
     },
     {
         label: '大佬',
@@ -323,10 +279,6 @@ const defaultWords: Word[] = [
     {
         label: '开车',
         text: 'kaiche',
-    },
-    {
-        label: '大雄',
-        text: 'daxiong',
     },
     {
         label: '代组',
@@ -351,10 +303,6 @@ const defaultWords: Word[] = [
     {
         label: '注塑',
         text: 'zhusu',
-    },
-    {
-        label: '成型',
-        text: 'chengxing',
     },
     {
         label: '菠萝',
@@ -527,6 +475,330 @@ const defaultWords: Word[] = [
     {
         label: '摸鱼',
         text: 'moyu',
+    },
+    {
+        label: '樱桃',
+        text: 'yingtao',
+    },
+    {
+        label: '树懒',
+        text: 'shulan',
+    },
+    {
+        label: '模拟',
+        text: 'moni',
+    },
+    {
+        label: '激光',
+        text: 'jiguang',
+    },
+    {
+        label: '阳极',
+        text: 'yangji',
+    },
+    {
+        label: '喷涂',
+        text: 'pentu',
+    },
+    {
+        label: '便当',
+        text: 'biandang',
+    },
+    {
+        label: '夜行者',
+        text: 'yexingzhe',
+    },
+    {
+        label: '锤头鲨',
+        text: 'chuitousha',
+    },
+    {
+        label: '核子',
+        text: 'hezi',
+    },
+    {
+        label: '涂改',
+        text: 'tugai',
+    },
+    {
+        label: '神佑',
+        text: 'shenyou',
+    },
+    {
+        label: '注音',
+        text: 'zhuyin',
+    },
+    {
+        label: '桃花',
+        text: 'taohua',
+    },
+    {
+        label: '暗黑',
+        text: 'anhei',
+    },
+    {
+        label: '海岸',
+        text: 'haian',
+    },
+    {
+        label: '巧克力',
+        text: 'qiaokeli',
+    },
+    {
+        label: '斯巴达',
+        text: 'sibada',
+    },
+    {
+        label: '鬼魂',
+        text: 'guihun',
+    },
+    {
+        label: '爆裂',
+        text: 'baolie',
+    },
+    {
+        label: '绿洲',
+        text: 'lvzhou',
+    },
+    {
+        label: '标本',
+        text: 'biaoben',
+    },
+    {
+        label: '巫妖',
+        text: 'wuyao',
+    },
+    {
+        label: '永恒',
+        text: 'yongheng',
+    },
+    {
+        label: '奶昔',
+        text: 'naixi',
+    },
+    {
+        label: '河马',
+        text: 'hema',
+    },
+    {
+        label: '使命',
+        text: 'shiming',
+    },
+    {
+        label: '召唤',
+        text: 'zhaohuan',
+    },
+    {
+        label: '黑色',
+        text: 'heise',
+    },
+    {
+        label: '行动',
+        text: 'xingdong',
+    },
+    {
+        label: '白色',
+        text: 'baise',
+    },
+    {
+        label: '牛头',
+        text: 'niutou',
+    },
+    {
+        label: '个性',
+        text: 'gexing',
+    },
+    {
+        label: '战神',
+        text: 'zhanshen',
+    },
+    {
+        label: '现代',
+        text: 'xiandai',
+    },
+    {
+        label: '战争',
+        text: 'zhanzheng',
+    },
+    {
+        label: '凯华',
+        text: 'kaihua',
+    },
+    {
+        label: '精微科',
+        text: 'jingweike',
+    },
+    {
+        label: '空间',
+        text: 'kongjian',
+    },
+    {
+        label: '东方',
+        text: 'dongfang',
+    },
+    {
+        label: '山水',
+        text: 'shanshui',
+    },
+    {
+        label: '微光',
+        text: 'weiguang',
+    },
+    {
+        label: '西装',
+        text: 'xizhuang',
+    },
+    {
+        label: '血缘',
+        text: 'xueyuan',
+    },
+    {
+        label: '诅咒',
+        text: 'zuzhou',
+    },
+    {
+        label: '钢板',
+        text: 'gangban',
+    },
+    {
+        label: '打卡',
+        text: 'daka',
+    },
+    {
+        label: '签到',
+        text: 'qiandao',
+    },
+    {
+        label: '上班',
+        text: 'shangban',
+    },
+    {
+        label: '双模',
+        text: 'shuangmo',
+    },
+    {
+        label: '单模',
+        text: 'danmo',
+    },
+    {
+        label: '划水',
+        text: 'huashui',
+    },
+    {
+        label: '外卖',
+        text: 'waimai',
+    },
+    {
+        label: '赞助',
+        text: 'zanzhu',
+    },
+    {
+        label: '打赏',
+        text: 'dashang',
+    },
+    {
+        label: '机械',
+        text: 'jixie',
+    },
+    {
+        label: '开关',
+        text: 'kaiguan',
+    },
+    {
+        label: '游戏',
+        text: 'youxi',
+    },
+    {
+        label: '无敌',
+        text: 'wudi',
+    },
+    {
+        label: '瞎眼',
+        text: 'xiayan',
+    },
+    {
+        label: '心态',
+        text: 'xintai',
+    },
+    {
+        label: '照片',
+        text: 'zhaopian',
+    },
+    {
+        label: '润滑',
+        text: 'runhua',
+    },
+    {
+        label: '联机',
+        text: 'lianji',
+    },
+    {
+        label: '配重',
+        text: 'peizhong',
+    },
+    {
+        label: '设计',
+        text: 'sheji',
+    },
+    {
+        label: '装饰',
+        text: 'zhuangshi',
+    },
+    {
+        label: '铭牌',
+        text: 'mingpai',
+    },
+    {
+        label: '定制',
+        text: 'dingzhi',
+    },
+    {
+        label: '独木舟',
+        text: 'dumuzhou',
+    },
+    {
+        label: '边牧',
+        text: 'bianmu',
+    },
+    {
+        label: '产品',
+        text: 'chanpin',
+    },
+    {
+        label: '鼠标',
+        text: 'shubiao',
+    },
+    {
+        label: '外设',
+        text: 'waishe',
+    },
+    {
+        label: '交流',
+        text: 'jiaoliu',
+    },
+    {
+        label: '磨砂',
+        text: 'mosha',
+    },
+    {
+        label: '透光',
+        text: 'touguang',
+    },
+    {
+        label: '打字',
+        text: 'dazi',
+    },
+    {
+        label: '玩具',
+        text: 'wanju',
+    },
+    {
+        label: '品牌',
+        text: 'pinpai',
+    },
+    {
+        label: '工作室',
+        text: 'gongzuoshi',
     },
 ];
 
