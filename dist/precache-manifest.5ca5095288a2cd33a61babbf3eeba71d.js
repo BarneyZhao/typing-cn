@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "cd647098789820acf1c126bcbe8c66ff",
+    "revision": "0444bd6e43ccfe2b201a40ffecc7aa56",
     "url": "/typing-cn/index.html"
   },
   {
@@ -8,11 +8,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/typing-cn/static/css/2.6df4c8f8.chunk.css"
   },
   {
-    "revision": "9550d1581919d97ac2ab",
+    "revision": "85f01fbf7e82aad413c4",
     "url": "/typing-cn/static/css/4.0690a2f9.chunk.css"
   },
   {
-    "revision": "c6ddb4025314eabe7356",
+    "revision": "32d7fec8743b0351746c",
     "url": "/typing-cn/static/css/5.65befed5.chunk.css"
   },
   {
@@ -24,7 +24,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/typing-cn/static/css/7.b9dba844.chunk.css"
   },
   {
-    "revision": "e805b7ca7763f9ac4e76",
+    "revision": "dabcaf06d09ea76bbdef",
     "url": "/typing-cn/static/css/main.8fb88f8b.chunk.css"
   },
   {
@@ -40,12 +40,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/typing-cn/static/js/3.8fc56543.chunk.js"
   },
   {
-    "revision": "9550d1581919d97ac2ab",
-    "url": "/typing-cn/static/js/4.15f1bc5c.chunk.js"
+    "revision": "85f01fbf7e82aad413c4",
+    "url": "/typing-cn/static/js/4.3aa1aa41.chunk.js"
   },
   {
-    "revision": "c6ddb4025314eabe7356",
-    "url": "/typing-cn/static/js/5.0c6f5771.chunk.js"
+    "revision": "32d7fec8743b0351746c",
+    "url": "/typing-cn/static/js/5.2b15160c.chunk.js"
   },
   {
     "revision": "2a4afdc3f0ac9da46af3",
@@ -56,12 +56,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/typing-cn/static/js/7.46a82096.chunk.js"
   },
   {
-    "revision": "e805b7ca7763f9ac4e76",
-    "url": "/typing-cn/static/js/main.7aa0239c.chunk.js"
+    "revision": "dabcaf06d09ea76bbdef",
+    "url": "/typing-cn/static/js/main.b847ba01.chunk.js"
   },
   {
-    "revision": "5a30cb9d6b433118a189",
-    "url": "/typing-cn/static/js/runtime-main.bb79340c.js"
+    "revision": "dd831627c7c4022a28cb",
+    "url": "/typing-cn/static/js/runtime-main.a21491ae.js"
   },
   {
     "revision": "523145c8f6578ba0c73b4efe9453ff3f",
