@@ -218,7 +218,11 @@ const Fingers: React.FC<MapState & MapDispatch> = (props) => {
             <Row justify="center" align="middle">
                 <Col flex="450px" className={`home-scale-box-${props.$state.root.uiScale}`}>
                     <div className="hide-control">
-                        <Button type="link" onClick={() => setIsHideCharacter((v) => !v)}>
+                        <Button
+                            tabIndex={-1}
+                            type="link"
+                            onClick={() => setIsHideCharacter((v) => !v)}
+                        >
                             {isHideCharacter ? '显示' : '隐藏'}拼音
                         </Button>
                     </div>

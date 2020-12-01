@@ -60,6 +60,7 @@ const Monkey: React.FC<MapState & MapDispatch> = (props) => {
         const coordinate = coordinateRef.current; // 此时坐标为下一个字母的坐标
         const mainElRect = (mainEl.current as any).getBoundingClientRect();
         const currentWordEl = getCurrentWordEl(mainEl.current)[coordinate[0]];
+        if (!currentWordEl) return;
         const currentLetterArr = Array.from<any>(currentWordEl.getElementsByClassName('letter'));
         if (currentLetterArr.length <= coordinate[1]) {
             const letterRect = currentLetterArr[coordinate[1] - 1].getBoundingClientRect();
@@ -79,9 +80,11 @@ const Monkey: React.FC<MapState & MapDispatch> = (props) => {
     const inputForwardFunc = useCallback(
         (keyCode: number, inputVal: string) => {
             const coordinate = coordinateRef.current;
-            let newCoordinate;
+            const isNewWordInputing =
+                userInput === '' || userInput.charAt(userInput.length - 1) === ' ';
+            let newCoordinate: number[];
             if (keyCode === SPACE_CODE) {
-                if (userInput === '' || userInput.charAt(userInput.length - 1) === ' ') {
+                if (isNewWordInputing) {
                     newCoordinate = coordinate;
                 } else {
                     newCoordinate = [coordinate[0] + 1, 0];
@@ -107,7 +110,7 @@ const Monkey: React.FC<MapState & MapDispatch> = (props) => {
                     letterObj.isCorrect = inputVal === letterObj.letter;
                     _wordArr[coordinate[0]].letterArr[coordinate[1]] = letterObj;
                 }
-                if (keyCode === SPACE_CODE) {
+                if (keyCode === SPACE_CODE && !isNewWordInputing) {
                     // 是否没有输入完单词就空格跳过
                     if (_wordArr[coordinate[0]].letterArr.some((l) => l.isCorrect === null)) {
                         _wordArr[coordinate[0]].isSkip = true;
@@ -125,42 +128,34 @@ const Monkey: React.FC<MapState & MapDispatch> = (props) => {
                     }
                 }
 
-                // 是否最后一个词、最后一个字母, 判断显示结果
+                // 是否 (新坐标已超出词组数) || (最后一个词、最后一个字母), 判断显示结果
                 if (
-                    coordinate[0] === _wordArr.length - 1 &&
-                    coordinate[1] === _wordArr[coordinate[0]].letterArr.length - 1
+                    newCoordinate[0] > _wordArr.length - 1 ||
+                    (coordinate[0] === _wordArr.length - 1 &&
+                        coordinate[1] === _wordArr[coordinate[0]].letterArr.length - 1)
                 ) {
-                    const currentWordEl = getCurrentWordEl(mainEl.current)[coordinate[0]];
-                    const extraLetterArr = currentWordEl.getElementsByClassName('extra-letter');
-                    if (!extraLetterArr || extraLetterArr.length === 0) {
-                        _wordArr[coordinate[0]].isCorrect = _wordArr[coordinate[0]].letterArr.every(
-                            (l) => l.isCorrect
-                        );
-                        if (_wordArr[coordinate[0]].isCorrect) {
-                            typeResultRef.current.right = _wordArr.filter(
-                                (w) => w.isCorrect
-                            ).length;
-                            typeResultRef.current.wrong =
-                                _wordArr.length - typeResultRef.current.right;
-                            typeResultRef.current.acc = Math.round(
-                                (typeResultRef.current.right /
-                                    (typeResultRef.current.right + typeResultRef.current.wrong)) *
-                                    100
-                            );
-                            typeResultRef.current.time.secs = Math.round(
-                                (Date.now() - typeResultRef.current.time.begin) / 1000
-                            );
-                            typeResultRef.current.wpm = (
-                                typeResultRef.current.right /
-                                (typeResultRef.current.time.secs / 60)
-                            ).toFixed(2);
-                            setIsTyping(false);
-                            setIsFadingTypeMain(true);
-                            setTimeout(() => {
-                                setShowTypeResult(true);
-                            }, 150);
-                        }
-                    }
+                    _wordArr[coordinate[0]].isCorrect = _wordArr[coordinate[0]].letterArr.every(
+                        (l) => l.isCorrect
+                    );
+                    typeResultRef.current.right = _wordArr.filter((w) => w.isCorrect).length;
+                    typeResultRef.current.wrong = _wordArr.length - typeResultRef.current.right;
+                    typeResultRef.current.acc = Math.round(
+                        (typeResultRef.current.right /
+                            (typeResultRef.current.right + typeResultRef.current.wrong)) *
+                            100
+                    );
+                    typeResultRef.current.time.secs = Math.round(
+                        (Date.now() - typeResultRef.current.time.begin) / 1000
+                    );
+                    typeResultRef.current.wpm = (
+                        typeResultRef.current.right /
+                        (typeResultRef.current.time.secs / 60)
+                    ).toFixed(2);
+                    setIsTyping(false);
+                    setIsFadingTypeMain(true);
+                    setTimeout(() => {
+                        setShowTypeResult(true);
+                    }, 150);
                 }
                 return _wordArr;
             });
@@ -309,10 +304,18 @@ const Monkey: React.FC<MapState & MapDispatch> = (props) => {
                         setWordCount(e.target.value);
                     }}
                 >
-                    <Radio.Button value={20}>20</Radio.Button>
-                    <Radio.Button value={30}>30</Radio.Button>
-                    <Radio.Button value={40}>40</Radio.Button>
-                    <Radio.Button value={50}>50</Radio.Button>
+                    <Radio.Button tabIndex={-1} value={20}>
+                        20
+                    </Radio.Button>
+                    <Radio.Button tabIndex={-1} value={30}>
+                        30
+                    </Radio.Button>
+                    <Radio.Button tabIndex={-1} value={40}>
+                        40
+                    </Radio.Button>
+                    <Radio.Button tabIndex={-1} value={50}>
+                        50
+                    </Radio.Button>
                 </Radio.Group>
             </div>
             <Row justify="center" align="middle">

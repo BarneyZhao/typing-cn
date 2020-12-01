@@ -23,11 +23,11 @@ import DonatePop from '../donatePop/DonatePop';
 const reg = /^[\u2E80-\u9FFF]+$/;
 const defaultWordStr = WORDS.map((item) => item.label).join('|');
 
-const ROUTE_HEADER_CONFIG: Record<string, boolean[]> = {
-    '/': [true, true, true],
-    '/monkey': [true, true, false],
-    '/test': [true, false, false],
-    '/about': [true, false, false],
+const ROUTE_HEADER_CONFIG: Record<string, (1 | 0)[]> = {
+    '/': [1, 1, 1],
+    '/monkey': [1, 1, 0],
+    '/test': [1, 0, 0],
+    '/about': [1, 0, 0],
 };
 
 const Header: React.FC<MapState & MapDispatch> = (props) => {
@@ -109,17 +109,37 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
         <div className="app-header">
             <Row>
                 <Col flex="auto">
-                    <Button type="link" icon={<InsertRowBelowOutlined />} onClick={() => go('')}>
+                    <Button
+                        tabIndex={-1}
+                        type="link"
+                        icon={<InsertRowBelowOutlined />}
+                        onClick={() => go('')}
+                    >
                         模式1(限时)
                     </Button>
-                    <Button type="link" icon={<BellOutlined />} onClick={() => go('monkey')}>
+                    <Button
+                        tabIndex={-1}
+                        type="link"
+                        icon={<BellOutlined />}
+                        onClick={() => go('monkey')}
+                    >
                         模式2(计时)
                     </Button>
-                    <Button type="link" icon={<SoundOutlined />} onClick={() => go('test')}>
+                    <Button
+                        tabIndex={-1}
+                        type="link"
+                        icon={<SoundOutlined />}
+                        onClick={() => go('test')}
+                    >
                         按键声音反馈
                     </Button>
                     <Popover placement="bottomLeft" content={<DonatePop go={go} />}>
-                        <Button type="link" icon={<SmileOutlined />} onClick={() => go('about')}>
+                        <Button
+                            tabIndex={-1}
+                            type="link"
+                            icon={<SmileOutlined />}
+                            onClick={() => go('about')}
+                        >
                             求打赏
                         </Button>
                     </Popover>
@@ -128,6 +148,7 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
             <Row style={{ marginTop: '10px' }}>
                 <Col flex="auto">
                     <Button
+                        tabIndex={-1}
                         type="link"
                         style={{ display: ROUTE_HEADER_CONFIG[pathname][0] ? '' : 'none' }}
                         icon={<AppstoreOutlined />}
@@ -136,6 +157,7 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
                         主题
                     </Button>
                     <Button
+                        tabIndex={-1}
                         type="link"
                         style={{ display: ROUTE_HEADER_CONFIG[pathname][1] ? '' : 'none' }}
                         icon={<SettingOutlined />}
@@ -155,9 +177,15 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
                             onChange={onUiSizeChange}
                             defaultValue={props.$state.root.uiScale}
                         >
-                            <Radio value="s">正常</Radio>
-                            <Radio value="m">大</Radio>
-                            <Radio value="l">特大</Radio>
+                            <Radio tabIndex={-1} value="s">
+                                正常
+                            </Radio>
+                            <Radio tabIndex={-1} value="m">
+                                大
+                            </Radio>
+                            <Radio tabIndex={-1} value="l">
+                                特大
+                            </Radio>
                         </Radio.Group>
                     </div>
                 </Col>
@@ -171,6 +199,7 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
                 footer={
                     <Tooltip placement="left" title="将自动去除重复词组">
                         <Button
+                            tabIndex={-1}
                             className="header-modal-confirm-btn"
                             type="primary"
                             onClick={handleModalOk}
