@@ -1,13 +1,31 @@
+/*
+ * @Author: zhaoxuanzi
+ * @Date: 2020-12-07 20:12:31
+ * @LastEditors: zhaoxuanzi
+ * @LastEditTime: 2021-01-28 21:20:06
+ */
 import React from 'react';
-import { Row, Col } from 'antd';
-// import { CoffeeOutlined } from '@ant-design/icons';
+import { Row, Col, Button } from 'antd';
 
 import './About.less';
-import avatar from '@/assets/avatar.jpg';
-import wechatpay from '@/assets/wechatpay.jpg';
-import alipay from '@/assets/alipay.jpg';
 
-const About: React.FC = () => {
+import { storeConnect, MapState as S, MapDispatch as D } from '@/store';
+import PayQrCode from '@/components/payQrCode/PayQrCode';
+import avatar from '@/assets/avatar.jpg';
+
+const About: React.FC<S & D> = (props) => {
+    const setBackImgUrl = () => {
+        // document.body.style.setProperty(
+        //     '--body-back-img',
+        //     'url("https://bing.ioliu.cn/v1/rand")'
+        //     // 'url("https://api.paugram.com/wallpaper/?source=gt")'
+        //     // 'url("https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture")'
+        // );
+        props.$dispatch(
+            'setBackImgUrl',
+            props.$state.root.backImgUrl ? '' : 'https://bing.ioliu.cn/v1/rand'
+        );
+    };
     return (
         <div>
             <Row>
@@ -27,45 +45,46 @@ const About: React.FC = () => {
                         <span>所以自己动手撸了一个只用打拼音字母的网站。</span>
                     </p>
                     <p>
-                        <span>UI布局参考的这个网站：</span>
+                        <span>模式一参考的这个网站：</span>
                         <a href="https://10fastfingers.com/typing-test/english">10fastfingers</a>
+                    </p>
+                    <p>
+                        <span>模式二参考的这个网站：</span>
+                        <a href="https://monkey-type.com/">monkey-type</a>
                     </p>
                     <p>
                         <span>可选主题参考的这个网站：</span>
                         <a href="https://typings.gg/">typings.gg</a>
                     </p>
                     <p>
-                        <span>这个网站分享了以后发现大家还挺喜欢的（分享在这儿：</span>
+                        <span>分享的帖子在这儿：</span>
                         <a href="https://www.zfrontier.com/app/flow/4K1P89Yb8LPl">zfrontier</a>
-                        <span>）</span>
+                    </p>
+                    <p>(#^.^#)喜欢的各位可以打赏支持一下呀~~~</p>
+                    <p>
+                        <span>打赏可以留言告诉我一套你喜欢的键帽配色，我会添加到主题中</span>
                     </p>
                     <p>
-                        接下来计划<span className="About__deleteline">抄</span>
-                        <span>借鉴一下这个网站的效果（</span>
-                        <a href="https://monkey-type.com/">monkey-type</a>）
-                        <span>体验一下另一种打字玩具。</span>
+                        <span>目前网站没有添加任何记录访问量的工具，</span>
+                        <span>如果打赏支持的朋友多，</span>
+                        <span>我也会花更多精力来更新这个玩具的ヾ(◍°∇°◍)ﾉﾞ</span>
                     </p>
-                    <p>
-                        为了能<span className="About__deleteline">赚点键盘/键帽钱</span>
-                        <span>得到大家的反馈，</span>
-                        <span>知道有人喜欢这个玩具，</span>
-                        <span>我才有动力继续在这上面花时间来完善它。</span>
-                    </p>
-                    <p>反馈的方式嘛，(#^.^#)喜欢的各位支持一下呀~~~</p>
+                    <p>(左边微信 - 右边支付宝)</p>
                     <div style={{ paddingLeft: 35 }}>
-                        <Row className="DonatePop__imgbox">
-                            <Col className="DonatePop__img" flex="auto">
-                                <img src={wechatpay} alt="wechatpay" />
-                            </Col>
-                            <Col className="DonatePop__divide" flex="30px"></Col>
-                            <Col className="DonatePop__img" flex="auto">
-                                <img src={alipay} alt="alipay" />
-                            </Col>
-                        </Row>
+                        <PayQrCode />
                     </div>
                     <p></p>
-                    <p>新功能说不定也会更快出来~</p>
                     <p>最后感谢各位喜欢这个玩具~</p>
+                    <p>
+                        <Button
+                            type="primary"
+                            size="small"
+                            className="About__lucky-btn"
+                            onClick={setBackImgUrl}
+                        >
+                            {props.$state.root.backImgUrl ? '关闭背景' : '试试手气'}
+                        </Button>
+                    </p>
                     <p></p>
                     <p></p>
                 </Col>
@@ -74,4 +93,4 @@ const About: React.FC = () => {
     );
 };
 
-export default About;
+export default storeConnect(About);

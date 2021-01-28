@@ -1,7 +1,8 @@
 .app-header {
     padding: 10px;
     .ant-btn-link,
-    .radio-text, .ant-radio-wrapper {
+    .radio-text,
+    .ant-radio-wrapper {
         color: var(--head-text-color);
         .ant-radio-inner {
             border-color: var(--primary-color);
@@ -21,7 +22,8 @@
 .header-modal-confirm-btn {
     background-color: var(--body-back-color);
     border-color: var(--body-back-color);
-    &:hover,&:focus {
+    &:hover,
+    &:focus {
         background-color: var(--body-back-color);
         border-color: var(--body-back-color);
         filter: brightness(1.5);
@@ -51,7 +53,7 @@
         }
     }
 }
-.header-modal-theme{
+.header-modal-theme {
     .ant-modal-content {
         background-color: var(--home-window-back-color);
         .ant-modal-close-x {
@@ -67,10 +69,40 @@
             margin-top: 12px;
             cursor: pointer;
             text-align: center;
-            transition: transform .2s ease;
+            transition: transform 0.2s ease;
             &:hover {
                 transform: scale(1.1);
             }
         }
     }
+}
+
+@keyframes heartBeat {
+    0% {
+        transform: scale(1);
+    }
+
+    14% {
+        transform: scale(1.1);
+    }
+
+    28% {
+        transform: scale(1);
+    }
+
+    42% {
+        transform: scale(1.1);
+    }
+
+    70% {
+        transform: scale(1);
+    }
+}
+
+.heartBeat {
+    animation-name: heartBeat;
+    animation-timing-function: ease-in-out;
+    animation-duration: 1.5s;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
 }

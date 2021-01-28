@@ -1,10 +1,15 @@
+/*
+ * @Author: zhaoxuanzi
+ * @Date: 2020-12-07 20:12:31
+ * @LastEditors: zhaoxuanzi
+ * @LastEditTime: 2021-01-28 15:57:10
+ */
 import React from 'react';
-import { Row, Col, Button } from 'antd';
+import { Button } from 'antd';
 import { CoffeeOutlined } from '@ant-design/icons';
 
 import './DonatePop.less';
-import wechatpay from '@/assets/wechatpay.jpg';
-import alipay from '@/assets/alipay.jpg';
+import PayQrCode from '@/components/payQrCode/PayQrCode';
 
 const DonatePop: React.FC<{ go: Function }> = (props) => {
     return (
@@ -14,15 +19,7 @@ const DonatePop: React.FC<{ go: Function }> = (props) => {
                 <CoffeeOutlined />
                 如何~
             </div>
-            <Row className="DonatePop__imgbox">
-                <Col className="DonatePop__img" flex="auto">
-                    <img src={wechatpay} alt="wechatpay" />
-                </Col>
-                <Col className="DonatePop__divide" flex="30px"></Col>
-                <Col className="DonatePop__img" flex="auto">
-                    <img src={alipay} alt="alipay" />
-                </Col>
-            </Row>
+            <PayQrCode />
             <div>
                 <Button type="link" onClick={() => props.go('/about')}>
                     关于这个网站

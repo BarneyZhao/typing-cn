@@ -5,7 +5,7 @@ import {
     AppstoreOutlined,
     InsertRowBelowOutlined,
     SoundOutlined,
-    SmileOutlined,
+    HeartTwoTone,
     BellOutlined,
 } from '@ant-design/icons';
 import { useLocation, useHistory } from 'react-router-dom';
@@ -136,8 +136,9 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
                     <Popover placement="bottomLeft" content={<DonatePop go={go} />}>
                         <Button
                             tabIndex={-1}
+                            className="heartBeat"
                             type="link"
-                            icon={<SmileOutlined />}
+                            icon={<HeartTwoTone twoToneColor="#9D0500" />} // AKIRA red
                             onClick={() => go('about')}
                         >
                             求打赏
