@@ -6,7 +6,7 @@
             color: var(--head-text-color);
             background-color: transparent;
             border: none;
-            opacity: .5;
+            opacity: 0.5;
             &.ant-radio-button-wrapper-checked {
                 color: var(--word-count-checked-color);
             }
@@ -56,7 +56,7 @@
         min-width: 920px;
         .word {
             margin: 7px 7px;
-            opacity: .8;
+            opacity: 0.8;
             &.correct {
                 color: var(--primary-color);
                 opacity: 1;
@@ -76,7 +76,7 @@
             .letter {
                 display: inline-block;
                 width: 14px;
-                opacity: .6;
+                opacity: 0.6;
                 &.correct {
                     color: var(--primary-color);
                     opacity: 1;
@@ -121,7 +121,7 @@
             font-size: 20px;
             line-height: 20px;
             color: var(--head-text-color);
-            opacity: .5;
+            opacity: 0.5;
         }
         .show-data {
             font-size: 44px;
@@ -135,20 +135,20 @@
         .reload-btn {
             height: 90px;
             width: 90px;
-            background-color: var(--body-back-color);
-            border-color: var(--body-back-color);
+            background-color: transparent;
+            border-color: transparent;
             text-shadow: none;
             box-shadow: none;
             &:hover,
             &:focus {
                 box-shadow: 0 0 0 5px var(--home-input-focus-color);
-                background-color: var(--body-back-color);
-                border-color: var(--body-back-color);
+                background-color: transparent;
+                border-color: transparent;
                 filter: brightness(1.1);
             }
             span {
                 color: var(--head-text-color);
-                opacity: .5;
+                opacity: 0.5;
                 font-size: 26px;
                 position: relative;
                 top: 2px;
@@ -158,7 +158,8 @@
 }
 
 @keyframes caretFlash {
-    0%, 100% {
+    0%,
+    100% {
         opacity: 0;
     }
     50% {
