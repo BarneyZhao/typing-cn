@@ -10,7 +10,8 @@
     "build": "node scripts/build.js",
     "online": "node scripts/build.js && node scripts/deploy.js master",
     "lint": "eslint --ext .jsx,.js,.tsx,.ts src",
-    "prettier": "prettier --write 'src/**/*.{js,jsx,ts,tsx,scss}'"
+    "prettier": "prettier --write 'src/**/*.{js,jsx,ts,tsx,scss}'",
+    "word": "node scripts/generateWords.js"
   },
   "dependencies": {
     "@babel/core": "7.7.4",

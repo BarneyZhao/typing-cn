@@ -1,3 +1,9 @@
+/*
+ * @Author: zhaoxuanzi
+ * @Date: 2020-12-07 20:12:31
+ * @LastEditors: zhaoxuanzi
+ * @LastEditTime: 2021-02-07 20:14:16
+ */
 import { lazy } from 'react';
 import { RouteProps } from 'react-router-dom';
 
@@ -10,6 +16,11 @@ const routes: Array<RouteProps & { children?: Array<RouteProps> }> = [
     {
         path: '/monkey',
         component: lazy(() => import('@/views/monkey/Monkey')),
+        exact: true,
+    },
+    {
+        path: '/sentence',
+        component: lazy(() => import('@/views/sentence/Sentence')),
         exact: true,
     },
     {

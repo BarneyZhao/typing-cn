@@ -1,20 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import {
-    Row,
-    Col,
-    Button,
-    Radio,
-    // Spin,
-    // Popover,
-    // Collapse,
-    // Tag,
-} from 'antd';
-import { ReloadOutlined } from '@ant-design/icons';
+import { Row, Col, Radio } from 'antd';
+import { RadioChangeEvent } from 'antd/lib/radio';
 
 import './Monkey.less';
 import { storeConnect, MapState, MapDispatch } from '@/store/index';
 import wordTool, { WordType } from '@/utils/wordTool';
-import { RadioChangeEvent } from 'antd/lib/radio';
+import TypeResult from '@/components/typeResult/TypeResult';
+import ReloadBtn from '@/components/reloadBtn/ReloadBtn';
 
 interface LetterObj {
     letter: string;
@@ -377,12 +369,7 @@ const Monkey: React.FC<MapState & MapDispatch> = (props) => {
                         }}
                     />
                     <div className="reload-line">
-                        <Button
-                            className="reload-btn"
-                            onClick={reloadWord}
-                            type="primary"
-                            icon={<ReloadOutlined />}
-                        />
+                        <ReloadBtn onClick={reloadWord} />
                     </div>
                     {/* {userInput} */}
                     <div className={`tip-line ${!isCaretFlash ? 'hide' : ''}`}>
@@ -396,29 +383,14 @@ const Monkey: React.FC<MapState & MapDispatch> = (props) => {
                 </Col>
                 <Col flex="900px" className={`type-result-box ${showTypeResult ? 'show' : ''}`}>
                     {/* {JSON.stringify(typeResultRef.current)} */}
-                    <div className="type-result">
-                        <Row justify="center" gutter={80}>
-                            <Col span={6}>
-                                <div className="label">WPM</div>
-                                <div className="show-data">{typeResultRef.current.wpm}</div>
-                            </Col>
-                            <Col span={6}>
-                                <div className="label">正确率</div>
-                                <div className="show-data">{typeResultRef.current.acc}%</div>
-                            </Col>
-                            <Col span={6}>
-                                <div className="label">用时</div>
-                                <div className="show-data">{typeResultRef.current.time.secs}s</div>
-                            </Col>
-                        </Row>
-                    </div>
+                    <TypeResult
+                        desc="WPM"
+                        numStr={typeResultRef.current.wpm}
+                        acc={typeResultRef.current.acc}
+                        secs={typeResultRef.current.time.secs}
+                    />
                     <div className="reload-line">
-                        <Button
-                            className="reload-btn"
-                            onClick={reloadWord}
-                            type="primary"
-                            icon={<ReloadOutlined />}
-                        />
+                        <ReloadBtn onClick={reloadWord} />
                     </div>
                 </Col>
             </Row>

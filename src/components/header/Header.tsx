@@ -7,6 +7,7 @@ import {
     SoundOutlined,
     HeartTwoTone,
     BellOutlined,
+    BarsOutlined,
 } from '@ant-design/icons';
 import { useLocation, useHistory } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
@@ -26,6 +27,7 @@ const defaultWordStr = WORDS.map((item) => item.label).join('|');
 const ROUTE_HEADER_CONFIG: Record<string, (1 | 0)[]> = {
     '/': [1, 1, 1],
     '/monkey': [1, 1, 0],
+    '/sentence': [1, 0, 0],
     '/test': [1, 0, 0],
     '/about': [1, 0, 0],
 };
@@ -125,6 +127,14 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
                     >
                         模式2(计时)
                     </Button>
+                    {/* <Button
+                        tabIndex={-1}
+                        type="link"
+                        icon={<BarsOutlined />}
+                        onClick={() => go('sentence')}
+                    >
+                        模式3(句子)
+                    </Button> */}
                     <Button
                         tabIndex={-1}
                         type="link"

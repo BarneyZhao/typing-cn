@@ -1,0 +1,22 @@
+.ReloadBtn {
+    height: 90px;
+    width: 90px;
+    background-color: transparent;
+    border-color: transparent;
+    text-shadow: none;
+    box-shadow: none;
+    &:hover,
+    &:focus {
+        box-shadow: 0 0 0 5px var(--home-input-focus-color);
+        background-color: transparent;
+        border-color: transparent;
+        filter: brightness(1.1);
+    }
+    span {
+        color: var(--head-text-color);
+        opacity: 0.5;
+        font-size: 26px;
+        position: relative;
+        top: 2px;
+    }
+}
