@@ -127,14 +127,14 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
                     >
                         模式2(计时)
                     </Button>
-                    {/* <Button
+                    <Button
                         tabIndex={-1}
                         type="link"
                         icon={<BarsOutlined />}
                         onClick={() => go('sentence')}
                     >
                         模式3(句子)
-                    </Button> */}
+                    </Button>
                     <Button
                         tabIndex={-1}
                         type="link"
