@@ -2,7 +2,7 @@
  * @Author: zhaoxuanzi
  * @Date: 2021-02-07 18:14:54
  * @LastEditors: zhaoxuanzi
- * @LastEditTime: 2021-02-08 17:33:38
+ * @LastEditTime: 2021-02-09 21:35:45
  */
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Row, Col, Radio, Input, Spin } from 'antd';
@@ -56,8 +56,10 @@ const Sentence: React.FC = () => {
             const tempArr = [..._senArr];
             const actingSen = { ...tempArr[sentenceIndex] };
             for (let index = 0; index < value.length; index++) {
-                const char = value.charAt(index);
-                actingSen.charArr[index].isCorrect = char === actingSen.charArr[index].char;
+                if (actingSen.charArr[index]) {
+                    actingSen.charArr[index].isCorrect =
+                        value.charAt(index) === actingSen.charArr[index].char;
+                }
             }
             tempArr.splice(sentenceIndex, 1, actingSen);
             return tempArr;
@@ -68,37 +70,37 @@ const Sentence: React.FC = () => {
         if (showTypeResult) {
             return;
         }
-        if (evt.key.length === 1) {
-            if (typeResultRef.current.time.begin === 0) {
-                typeResultRef.current.time.begin = Date.now();
-            }
+        if (typeResultRef.current.time.begin === 0) {
+            typeResultRef.current.time.begin = Date.now();
         }
         if (evt.keyCode === ENTER_CODE || evt.keyCode === SPACE_CODE) {
-            if (sentenceIndex === sentenceArr.length - 1) {
-                const totalCharArr = sentenceArr.reduce((arr, item) => {
-                    return [...arr, ...item.charArr];
-                }, [] as CharObj[]);
-                typeResultRef.current.right = totalCharArr.filter((w) => w.isCorrect).length;
-                typeResultRef.current.wrong = totalCharArr.length - typeResultRef.current.right;
-                typeResultRef.current.acc = Math.round(
-                    (typeResultRef.current.right /
-                        (typeResultRef.current.right + typeResultRef.current.wrong)) *
-                        100
-                );
-                typeResultRef.current.time.secs = Math.round(
-                    (Date.now() - typeResultRef.current.time.begin) / 1000
-                );
-                typeResultRef.current.cpm = (
-                    typeResultRef.current.right /
-                    (typeResultRef.current.time.secs / 60)
-                ).toFixed(2);
-                setIsFadingTypeMain(true);
-                setTimeout(() => {
-                    setShowTypeResult(true);
-                }, 150);
-            } else if (userInput.length >= sentenceArr[sentenceIndex].sentence.length) {
-                setSentenceIndex((_index) => _index + 1);
-                setUserInput('');
+            if (userInput.length >= sentenceArr[sentenceIndex].sentence.length) {
+                if (sentenceIndex === sentenceArr.length - 1) {
+                    const totalCharArr = sentenceArr.reduce((arr, item) => {
+                        return [...arr, ...item.charArr];
+                    }, [] as CharObj[]);
+                    typeResultRef.current.right = totalCharArr.filter((w) => w.isCorrect).length;
+                    typeResultRef.current.wrong = totalCharArr.length - typeResultRef.current.right;
+                    typeResultRef.current.acc = Math.round(
+                        (typeResultRef.current.right /
+                            (typeResultRef.current.right + typeResultRef.current.wrong)) *
+                            100
+                    );
+                    typeResultRef.current.time.secs = Math.round(
+                        (Date.now() - typeResultRef.current.time.begin) / 1000
+                    );
+                    typeResultRef.current.cpm = (
+                        typeResultRef.current.right /
+                        (typeResultRef.current.time.secs / 60)
+                    ).toFixed(2);
+                    setIsFadingTypeMain(true);
+                    setTimeout(() => {
+                        setShowTypeResult(true);
+                    }, 150);
+                } else {
+                    setSentenceIndex((_index) => _index + 1);
+                    setUserInput('');
+                }
             }
         }
     };
