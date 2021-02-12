@@ -1,3 +1,9 @@
+/*
+ * @Author: zhaoxuanzi
+ * @Date: 2020-12-07 20:12:31
+ * @LastEditors: zhaoxuanzi
+ * @LastEditTime: 2021-02-12 22:06:13
+ */
 import site from '@/utils/siteIcon';
 
 import def from './default';
@@ -14,6 +20,7 @@ import konmomo from './konmomo';
 import spaceCadet from './spaceCadet';
 import shoko from './shoko';
 import phYellow from './phYellow';
+import yeeti from './yeeti';
 
 export const changeColor = (themeObj: any) => {
     const temp = { ...themeObj };
@@ -40,4 +47,5 @@ export default [
     { ...spaceCadet },
     { ...shoko },
     { ...phYellow },
+    { ...yeeti },
 ];

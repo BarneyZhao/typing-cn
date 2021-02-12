@@ -6,6 +6,7 @@ export default {
     '--error-color': '#f5222d',
     //
     '--body-back-color': '#282c34',
+    '--body-back-image': 'none',
     '--head-text-color': '#fffffe',
     //
     '--home-window-back-color': '#fffffd',
