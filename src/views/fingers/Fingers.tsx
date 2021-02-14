@@ -90,9 +90,10 @@ const Fingers: React.FC<MapState & MapDispatch> = (props) => {
     const onCountdownFinish = () => {
         if (timeStartRef.current) {
             const inputWordArr = typingResultRef.current.inputWordArr;
+            const correctCount = inputWordArr.filter((word: any) => word.isCorrect === true).length;
             typingResultRef.current = {
-                wpm: Math.round(inputWordArr.length / (countdownTimeRef.current / 60)),
-                correct: inputWordArr.filter((word: any) => word.isCorrect === true).length,
+                wpm: Math.round(correctCount / (countdownTimeRef.current / 60)),
+                correct: correctCount,
                 wrong: inputWordArr.filter((word: any) => word.isCorrect === false).length,
                 inputWordArr,
             };
