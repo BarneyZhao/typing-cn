@@ -2,7 +2,7 @@
  * @Author: zhaoxuanzi
  * @Date: 2020-12-07 20:12:31
  * @LastEditors: zhaoxuanzi
- * @LastEditTime: 2021-02-07 20:14:16
+ * @LastEditTime: 2021-02-23 11:37:49
  */
 import { lazy } from 'react';
 import { RouteProps } from 'react-router-dom';
@@ -21,6 +21,11 @@ const routes: Array<RouteProps & { children?: Array<RouteProps> }> = [
     {
         path: '/sentence',
         component: lazy(() => import('@/views/sentence/Sentence')),
+        exact: true,
+    },
+    {
+        path: '/training',
+        component: lazy(() => import('@/views/training/Training')),
         exact: true,
     },
     {

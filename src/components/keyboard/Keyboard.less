@@ -1,0 +1,81 @@
+.Keyboard {
+    width: 984px;
+    margin: 0 auto;
+    .key-item {
+        height: 60px;
+        // line-height: 60px;
+        // text-align: center;
+        padding-left: 6px;
+        border-radius: 5px;
+        border: 1px solid var(--head-text-color);
+        color: var(--head-text-color);
+        margin-top: 6px;
+        &.placeholder {
+            height: 0;
+            border: none;
+        }
+        &.high-light {
+            background-color: var(--home-reload-btn-back-color);
+            color: var(--home-reload-btn-text-color);
+        }
+        &.blur {
+            filter: blur(1px);
+        }
+    }
+}
+
+@keyframes keyCorrect {
+    from {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale3d(1.1, 1.1, 1.1);
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+.keyCorrect {
+    animation-name: keyCorrect;
+    animation-timing-function: ease-in-out;
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+}
+
+@keyframes headShake {
+    0% {
+        transform: translateX(0);
+    }
+
+    6.5% {
+        transform: translateX(-6px) rotateY(-9deg);
+    }
+
+    18.5% {
+        transform: translateX(5px) rotateY(7deg);
+    }
+
+    31.5% {
+        transform: translateX(-3px) rotateY(-5deg);
+    }
+
+    43.5% {
+        transform: translateX(2px) rotateY(3deg);
+    }
+
+    50% {
+        transform: translateX(0);
+    }
+}
+
+.headShake {
+    animation-name: headShake;
+    animation-timing-function: ease-in-out;
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+}

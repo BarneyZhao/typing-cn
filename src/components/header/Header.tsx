@@ -28,6 +28,7 @@ const ROUTE_HEADER_CONFIG: Record<string, (1 | 0)[]> = {
     '/': [1, 1, 1],
     '/monkey': [1, 1, 0],
     '/sentence': [1, 0, 0],
+    '/training': [1, 0, 0],
     '/test': [1, 0, 0],
     '/about': [1, 0, 0],
 };
