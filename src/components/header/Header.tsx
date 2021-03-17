@@ -8,6 +8,7 @@ import {
     HeartTwoTone,
     BellOutlined,
     BarsOutlined,
+    CarryOutOutlined,
 } from '@ant-design/icons';
 import { useLocation, useHistory } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
@@ -135,6 +136,14 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
                         onClick={() => go('sentence')}
                     >
                         模式3(句子)
+                    </Button>
+                    <Button
+                        tabIndex={-1}
+                        type="link"
+                        icon={<CarryOutOutlined />}
+                        onClick={() => go('training')}
+                    >
+                        指法练习
                     </Button>
                     <Button
                         tabIndex={-1}
