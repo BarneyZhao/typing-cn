@@ -22,6 +22,7 @@ import shoko from './shoko';
 import phYellow from './phYellow';
 import yeeti from './yeeti';
 import botanical from './botanical';
+import aqua from './aqua';
 
 export const changeColor = (themeObj: any) => {
     const temp = { ...themeObj };
@@ -50,4 +51,5 @@ export default [
     { ...phYellow },
     { ...yeeti },
     { ...botanical },
+    { ...aqua },
 ];
