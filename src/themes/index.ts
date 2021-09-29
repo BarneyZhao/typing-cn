@@ -6,50 +6,23 @@
  */
 import site from '@/utils/siteIcon';
 
-import def from './default';
-import carbon from './carbon';
-import olivia from './olivia';
-import t9009 from './9009';
-import oblivion from './oblivion';
-import godspeed from './godspeed';
-import nautilus from './nautilus';
-// import yellowLine from './yellowLine';
-import avocado from './avocado';
-import t2600 from './2600';
-import konmomo from './konmomo';
-import spaceCadet from './spaceCadet';
-import shoko from './shoko';
-import phYellow from './phYellow';
-import yeeti from './yeeti';
-import botanical from './botanical';
-import aqua from './aqua';
+import list from './config';
 
-export const changeColor = (themeObj: any) => {
-    const temp = { ...themeObj };
-    site.setSiteIcon(temp['--body-back-color'], temp.textColor || temp['--primary-color']);
-    delete temp.name;
-    delete temp.textColor;
-    Object.entries<string>(Object.assign({}, def, temp)).forEach(([k, v]) => {
-        document.body.style.setProperty(k, v);
-    });
+export default list;
+
+export const changeTheme = (theme: typeof list[0]) => {
+    // const temp = { ...themeObj };
+    site.setSiteIcon(theme.bgColor, theme.textColor);
+    // delete temp.name;
+    // delete temp.textColor;
+    // Object.entries<string>(Object.assign({}, def, temp)).forEach(([k, v]) => {
+    //     document.body.style.setProperty(k, v);
+    // });
+    const themeLinkEl = document.querySelector('#current-theme');
+    if (!themeLinkEl) return;
+    const oldUrl = themeLinkEl.getAttribute('href') || '';
+    themeLinkEl.setAttribute(
+        'href',
+        oldUrl.substring(0, oldUrl.lastIndexOf('/')) + `/${theme.name.replace(' ', '-')}.css`
+    );
 };
-
-export default [
-    { ...def },
-    { ...carbon },
-    { ...olivia },
-    { ...t9009 },
-    { ...oblivion },
-    { ...godspeed },
-    { ...nautilus },
-    // { ...yellowLine },
-    { ...avocado },
-    { ...t2600 },
-    { ...konmomo },
-    { ...spaceCadet },
-    { ...shoko },
-    { ...phYellow },
-    { ...yeeti },
-    { ...botanical },
-    { ...aqua },
-];

@@ -1,0 +1,15 @@
+:root {
+    --primary-color: rgb(52,31,35);
+    --success-color: inherit;
+    --bg-color: rgb(101,145,91);
+    --head-text-color: rgb(239,234,155);
+    --home-window-bg-color: rgb(239,234,155);
+    --home-window-text-color: rgb(101,145,91);
+    --success-opacity: .6;
+    --home-countdown-bg-color: rgb(52,31,35);
+    --home-countdown-text-color: rgb(239,234,155);
+    --home-reload-btn-bg-color: rgb(52,31,35);
+    --home-reload-btn-text-color: rgb(239,234,155);
+    --word-count-checked-color: rgb(52,31,35);
+    --monkey-caret-color: rgb(52,31,35);
+}

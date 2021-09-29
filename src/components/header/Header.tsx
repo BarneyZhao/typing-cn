@@ -18,7 +18,7 @@ import { storeConnect, MapState, MapDispatch } from '@/store/index';
 import WORDS from '@/words';
 import { getPinyin } from '@/utils/pinyin';
 
-import themeList, { changeColor } from '@/themes';
+import themeList, { changeTheme } from '@/themes';
 
 import DonatePop from '../donatePop/DonatePop';
 
@@ -99,12 +99,12 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
         if (search) {
             const themeObj = themeList.find((th) => th.name === search.slice(1).replace('-', ' '));
             if (themeObj) {
-                changeColor(themeObj);
+                changeTheme(themeObj);
             }
         } else if (props.$state.root.uiTheme) {
             const themeObj = themeList.find((th) => th.name === props.$state.root.uiTheme);
             if (themeObj) {
-                changeColor(themeObj);
+                changeTheme(themeObj);
             }
         }
     }, [search, props.$state.root.uiTheme]);
@@ -277,8 +277,8 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
                             className="theme-display-block"
                             key={index}
                             style={{
-                                backgroundColor: theme['--body-back-color'],
-                                color: theme.textColor || theme['--primary-color'],
+                                backgroundColor: theme.bgColor,
+                                color: theme.textColor,
                             }}
                             onClick={() => themeBlockClick(theme)}
                         >
