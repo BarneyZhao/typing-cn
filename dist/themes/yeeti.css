@@ -1,0 +1,11 @@
+:root {
+    --primary-color: #80A7CB;
+    --bg-color: #81B9D0;
+    --body-back-image: linear-gradient(110deg, #C8E5E3, #80A7CB 82%);
+    --home-window-bg-color: white;
+    --home-window-text-color: #80A7CB;
+    --home-countdown-bg-color: #96C8D9;
+    --home-reload-btn-bg-color: #81B9D0;
+    --word-count-checked-color: #80A7CB;
+    --monkey-caret-color: #80A7CB;
+}
