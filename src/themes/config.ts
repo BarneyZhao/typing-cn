@@ -17,4 +17,5 @@ export default [
     { name: 'botanical', bgColor: 'rgb(167,183,174)', textColor: 'rgb(74,93,87)' },
     { name: 'aqua', bgColor: '#056e7f', textColor: '#7cc3c1' },
     { name: 'striker', bgColor: '#124883', textColor: '#d7dcda' },
+    { name: '8008', bgColor: '#333a45', textColor: '#f44c7f' },
 ];

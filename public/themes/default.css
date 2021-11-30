@@ -36,4 +36,5 @@
     --word-count-checked-color: #1890ff;
     --monkey-caret-color: #1890ff;
     --monkey-sub-color: inherit;
+    --monkey-error-color: red;
 }
