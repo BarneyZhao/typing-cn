@@ -12,6 +12,8 @@ React CRA generated.
 - React-Router
 - Redux
 
+`master` 分支为构建后代码
+
 #### 项目开发
 
 1.  先切换至`dev`分支

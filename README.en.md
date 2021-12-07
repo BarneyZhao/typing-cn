@@ -12,6 +12,8 @@ React CRA generated.
 - React-Router
 - Redux
 
+Branch `master` is builded code.
+
 #### Instructions
 
 1.  switch to branch `dev`
