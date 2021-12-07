@@ -1,19 +1,25 @@
-## typing-cn
-拼音打字玩具
+# typing-cn
 
-### 项目开发
+#### 介绍
 
-``` shell
+拼音打字玩具。
+Chinese type test with PinYin.
+
+#### 软件架构
+
+React CRA generated.
+
+-   React-Router
+-   Redux
+
+`master` 分支为构建后代码
+
+#### 项目开发
+
+1.  先切换至`dev`分支
+2.  然后使用`yarn`启动
+
+```shell
 yarn install
 yarn dev
 ```
-
-### 项目构建
-
-``` shell
-yarn online
-```
-
-### 发布说明
-
-```yarn online ```
