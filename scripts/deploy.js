@@ -39,7 +39,7 @@ if (!['beta', 'master'].includes(branch)) {
         {
             branch,
             repo,
-            dest: 'dist/',
+            dest: 'docs/',
             message,
         },
         successFunc
