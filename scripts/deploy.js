@@ -34,6 +34,7 @@ if (!['beta', 'master'].includes(branch)) {
     }
     console.log('\n');
     console.log(chalk.yellow(` Now publishing to the ${branch} brand... \n`));
+    ghpages.clean();
     ghpages.publish(
         'dist',
         {
