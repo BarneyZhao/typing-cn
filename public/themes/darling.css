@@ -1,0 +1,16 @@
+:root {
+    --primary-color: #a30000;
+    --success-color: #a30000;
+    --error-color: #1890ff;
+
+    --bg-color: #fec8cd;
+    --head-text-color: #a30000;
+
+    --home-window-bg-color: #fffffd;
+    --home-window-text-color: #a30000;
+    --home-reload-btn-bg-color: #a30000;
+
+    --word-count-checked-color: #ffffff;
+    --monkey-caret-color: #ffffff;
+    --monkey-error-color: #1890ff;
+}

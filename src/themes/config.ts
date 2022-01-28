@@ -18,4 +18,6 @@ export default [
     { name: 'aqua', bgColor: '#056e7f', textColor: '#7cc3c1' },
     { name: 'striker', bgColor: '#124883', textColor: '#d7dcda' },
     { name: '8008', bgColor: '#333a45', textColor: '#f44c7f' },
+    { name: 'darling', bgColor: '#fec8cd', textColor: '#a30000' },
+    { name: 'dracula', bgColor: '#282a36', textColor: '#bd93f9' },
 ];
