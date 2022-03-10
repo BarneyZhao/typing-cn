@@ -86,7 +86,10 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
         setWords(evt.target.value);
     };
     const themeBlockClick = (theme: any) => {
-        window.location.href = window.location.href.split('?')[0];
+        const href = window.location.href;
+        if (href.includes('#') && href.includes('?')) {
+            window.location.href = href.split('?')[0];
+        }
         props.$dispatch('setUiTheme', theme.name);
     };
 
