@@ -1,7 +1,7 @@
 {
     "name": "typing-cn",
     "description": "Chinese type test with PinYin.",
-    "version": "1.0.1",
+    "version": "20220310a",
     "packageManager": "pnpm@6.27.1",
     "repository": {
         "url": "https://gitee.com/barneyZhao/typing-cn.git",
@@ -11,6 +11,7 @@
         "dev": "vite",
         "build": "tsc && vite build",
         "preview": "vite preview",
+        "update-version": "node scripts/updateVersion.js",
         "online": "npm run build && node scripts/deploy.js master",
         "lint": "eslint --ext .jsx,.js,.tsx,.ts src",
         "prettier": "prettier --write 'src/**/*.{js,jsx,ts,tsx,scss}'",
@@ -31,6 +32,7 @@
         "@babel/core": "^7.17.5",
         "@babel/plugin-syntax-flow": "^7.16.7",
         "@babel/plugin-transform-react-jsx": "^7.17.3",
+        "@npmcli/package-json": "^1.0.1",
         "@types/less": "^3.0.3",
         "@types/node": "^17.0.21",
         "@types/react": "^17.0.39",

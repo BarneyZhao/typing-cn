@@ -5,6 +5,7 @@ specifiers:
   '@babel/core': ^7.17.5
   '@babel/plugin-syntax-flow': ^7.16.7
   '@babel/plugin-transform-react-jsx': ^7.17.3
+  '@npmcli/package-json': ^1.0.1
   '@types/less': ^3.0.3
   '@types/node': ^17.0.21
   '@types/react': ^17.0.39
@@ -52,6 +53,7 @@ devDependencies:
   '@babel/core': 7.17.5
   '@babel/plugin-syntax-flow': 7.16.7_@babel+core@7.17.5
   '@babel/plugin-transform-react-jsx': 7.17.3_@babel+core@7.17.5
+  '@npmcli/package-json': 1.0.1
   '@types/less': 3.0.3
   '@types/node': 17.0.21
   '@types/react': 17.0.39
@@ -1534,6 +1536,12 @@ packages:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
+    dev: true
+
+  /@npmcli/package-json/1.0.1:
+    resolution: {integrity: sha512-y6jnu76E9C23osz8gEMBayZmaZ69vFOIk8vR1FJL/wbEJ54+9aVG9rLTjQKSXfgYZEr50nw1txBBFfBZZe+bYg==}
+    dependencies:
+      json-parse-even-better-errors: 2.3.1
     dev: true
 
   /@rollup/pluginutils/4.2.0:
