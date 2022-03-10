@@ -1,7 +1,7 @@
 {
     "name": "typing-cn",
     "description": "Chinese type test with PinYin.",
-    "version": "20220310a",
+    "version": "20220310b",
     "packageManager": "pnpm@6.27.1",
     "repository": {
         "url": "https://gitee.com/barneyZhao/typing-cn.git",
@@ -56,14 +56,5 @@
         "stylelint-config-standard": "^25.0.0",
         "typescript": "^4.5.4",
         "vite": "^2.8.0"
-    },
-    "eslintConfig": {
-        "extends": "react-app",
-        "plugins": [
-            "prettier"
-        ],
-        "rules": {
-            "prettier/prettier": "error"
-        }
     }
 }
