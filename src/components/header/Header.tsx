@@ -10,8 +10,7 @@ import {
     BarsOutlined,
     CarryOutOutlined,
 } from '@ant-design/icons';
-import { useLocation, useHistory } from 'react-router-dom';
-// import { Link } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import './Header.less';
 import { storeConnect, MapState, MapDispatch } from '@/store/index';
@@ -47,7 +46,7 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
     const [errorWordList, setErrorWordList] = useState<string[]>([]);
 
     const { search, pathname } = useLocation();
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const onUiSizeChange = (evt: any) => {
         props.$dispatch('setUiScale', evt.target.value);
@@ -92,7 +91,7 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
     };
 
     const go = (route: string) => {
-        history.push(route);
+        navigate(route);
     };
 
     useEffect(() => {
@@ -171,7 +170,7 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
                     <Button
                         tabIndex={-1}
                         type="link"
-                        style={{ display: ROUTE_HEADER_CONFIG[pathname][0] ? '' : 'none' }}
+                        style={{ display: ROUTE_HEADER_CONFIG[pathname]?.[0] ? '' : 'none' }}
                         icon={<AppstoreOutlined />}
                         onClick={() => setThemeModalVisible(true)}
                     >
@@ -180,7 +179,7 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
                     <Button
                         tabIndex={-1}
                         type="link"
-                        style={{ display: ROUTE_HEADER_CONFIG[pathname][1] ? '' : 'none' }}
+                        style={{ display: ROUTE_HEADER_CONFIG[pathname]?.[1] ? '' : 'none' }}
                         icon={<SettingOutlined />}
                         onClick={() => setSettingModalVisible(true)}
                     >
@@ -188,7 +187,7 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
                     </Button>
                     <div
                         style={{
-                            display: ROUTE_HEADER_CONFIG[pathname][2] ? 'inline-block' : 'none',
+                            display: ROUTE_HEADER_CONFIG[pathname]?.[2] ? 'inline-block' : 'none',
                         }}
                     >
                         <span className="radio-text">

@@ -1,52 +1,58 @@
-import React, { Suspense } from 'react';
-import { HashRouter as Router, Switch, Route } from 'react-router-dom';
-import routes from './routes';
+import { FC, lazy, useEffect } from 'react';
+import { useNavigate, useRoutes } from 'react-router-dom';
 
-interface Props {
-    mainClass: string;
-    header: React.ReactNode;
-    footer: React.ReactNode;
-}
+const Fingers = lazy(() => import('@/views/fingers/Fingers'));
+const Monkey = lazy(() => import('@/views/monkey/Monkey'));
+const Sentence = lazy(() => import('@/views/sentence/Sentence'));
+const Training = lazy(() => import('@/views/training/Training'));
+const Test = lazy(() => import('@/views/test/Test'));
+const About = lazy(() => import('@/views/about/About'));
 
-const router: React.FC<Props> = (routeProps) => (
-    <Router basename={process.env.REACT_APP_DOMAIN}>
-        {routeProps.header}
-        <div className={routeProps.mainClass}>
-            <Suspense fallback={<div></div>}>
-                <Switch>
-                    {routes.map((route, i) => (
-                        <Route
-                            path={route.path}
-                            exact={route.exact && !route.children}
-                            key={i}
-                            render={(props) => (
-                                <div>
-                                    {route.component
-                                        ? React.createElement(route.component, props)
-                                        : ''}
-                                    {route.children && route.children.length > 0 && (
-                                        <Suspense fallback={<div></div>}>
-                                            <Switch>
-                                                {route.children.map((child, j) => (
-                                                    <Route
-                                                        path={props.match.url + child.path}
-                                                        exact={child.exact}
-                                                        key={j}
-                                                        component={child.component}
-                                                    />
-                                                ))}
-                                            </Switch>
-                                        </Suspense>
-                                    )}
-                                </div>
-                            )}
-                        />
-                    ))}
-                </Switch>
-            </Suspense>
-        </div>
-        {routeProps.footer}
-    </Router>
-);
+const Redirect: FC<{ to: string }> = ({ to }) => {
+    const navigate = useNavigate();
+    useEffect(() => {
+        navigate(to);
+    });
+    return null;
+};
 
-export default router;
+const AppRouter: FC = () => {
+    /**
+     * react-router-dom@6+ 路由配置方式
+     * https://github.com/remix-run/react-router/blob/main/docs/upgrading/v5.md#use-useroutes-instead-of-react-router-config
+     */
+    const el = useRoutes([
+        {
+            path: '/',
+            element: <Fingers />,
+        },
+        {
+            path: '/monkey',
+            element: <Monkey />,
+        },
+        {
+            path: '/sentence',
+            element: <Sentence />,
+        },
+        {
+            path: '/training',
+            element: <Training />,
+        },
+        {
+            path: '/test',
+            element: <Test />,
+        },
+        {
+            path: '/about',
+            element: <About />,
+        },
+        {
+            path: '*',
+            element: <Redirect to="/" />,
+        },
+    ]);
+
+    return el;
+};
+
+export default AppRouter;

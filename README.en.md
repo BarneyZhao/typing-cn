@@ -7,7 +7,7 @@ Chinese type test with PinYin.
 
 #### Software Architecture
 
-React CRA generated.
+Vite React generated.
 
 -   React-Router
 -   Redux
@@ -17,9 +17,9 @@ Branch `master` is builded code.
 #### Instructions
 
 1.  switch to branch `dev`
-2.  Use `yarn` to boot
+2.  Use `pnpm` to boot
 
 ```shell
-yarn install
-yarn dev
+pnpm install
+pnpm dev
 ```
