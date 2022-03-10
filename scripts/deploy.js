@@ -61,17 +61,19 @@ const publishTo = (url) => {
     //     message = prompt.ans;
     // }
     ghpages.clean();
-    const repos = Object.keys(repoObj)
-        .map((k) => {
-            if (k.startsWith('url')) return repoObj[k];
-            return undefined;
-        })
-        .filter(Boolean);
+    // const repos = Object.keys(repoObj)
+    //     .map((k) => {
+    //         if (k.startsWith('url')) return repoObj[k];
+    //         return undefined;
+    //     })
+    //     .filter(Boolean);
 
-    const resArr = [];
-    for (const repoUrl of repos) {
-        resArr.push(await publishTo(repoUrl));
-    }
+    // const resArr = [];
+    // for (const repoUrl of repos) {
+    //     resArr.push(await publishTo(repoUrl));
+    // }
+    const resArr = [await publishTo(repoObj.url)];
+
     if (resArr.every(Boolean)) {
         const giteeUrl = 'https://gitee.com/barneyZhao/typing-cn/pages';
         console.log(` Auto open browser to ${chalk.yellow(giteeUrl)} \n`);
