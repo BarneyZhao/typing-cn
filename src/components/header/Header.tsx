@@ -15,7 +15,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import './Header.less';
 import { storeConnect, MapState, MapDispatch } from '@/store/index';
 import WORDS from '@/words';
-import { getPinyin } from '@/utils/pinyin';
+// import { getPinyin } from '@/utils/pinyin';
 
 import themeList, { changeTheme } from '@/themes';
 
@@ -51,7 +51,7 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
     const onUiSizeChange = (evt: any) => {
         props.$dispatch('setUiScale', evt.target.value);
     };
-    const handleModalOk = () => {
+    const handleModalOk = async () => {
         if (wordsMode === '1') {
             props.$dispatch('setWordsMode', wordsMode);
             setSettingModalVisible(false);
@@ -65,6 +65,7 @@ const Header: React.FC<MapState & MapDispatch> = (props) => {
         });
         setErrorWordList(errorList);
         if (errorList.length === 0) {
+            const { getPinyin } = await import('@/utils/pinyin');
             props.$dispatch('setWordsMode', wordsMode);
             setWords(inputWordList.join('|'));
             console.time('getPinyin');
