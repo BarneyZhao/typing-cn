@@ -1,9 +1,6 @@
 const packageJson = require('@npmcli/package-json');
 
-const getMonStr = (nd) => {
-    const m = nd.getMonth() + 1;
-    return m < 10 ? '0' + m : m;
-};
+const getZeroFillStr = (n) => (n < 10 ? '0' + n : n);
 
 /**
  * 要在 build 之前更新 version
@@ -14,7 +11,11 @@ const getMonStr = (nd) => {
     const version = pkgJson.content.version;
     const versionCode = version.slice(8);
     const nd = new Date();
-    let newVersion = `${nd.getFullYear()}${getMonStr(nd)}${nd.getDate()}`;
+    let newVersion = [
+        nd.getFullYear(),
+        getZeroFillStr(nd.getMonth() + 1),
+        getZeroFillStr(nd.getDate()),
+    ].join('');
     const isSameDay = version.startsWith(newVersion);
 
     if (!version || !versionCode || !isSameDay) {

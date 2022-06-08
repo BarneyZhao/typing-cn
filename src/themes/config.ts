@@ -20,4 +20,5 @@ export default [
     { name: '8008', bgColor: '#333a45', textColor: '#f44c7f' },
     { name: 'darling', bgColor: '#fec8cd', textColor: '#a30000' },
     { name: 'dracula', bgColor: '#282a36', textColor: '#bd93f9' },
+    { name: 'toxic', bgColor: '#3f4241', textColor: '#d0df00' },
 ];

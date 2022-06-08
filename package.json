@@ -1,7 +1,7 @@
 {
     "name": "typing-cn",
     "description": "Chinese type test with PinYin.",
-    "version": "20220331a",
+    "version": "20220608a",
     "packageManager": "pnpm@6.27.1",
     "repository": {
         "url": "https://gitee.com/barneyZhao/typing-cn.git",
