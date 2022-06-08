@@ -1,1 +1,0 @@
-System.register(["./index-legacy.bbe98e6a.js"],(function(e){"use strict";var t;return{setters:[function(e){t=e.d}],execute:function(){const n=e("w",{shuffle(e){for(let t=e.length-1;t>=0;t--){let n=Math.floor(Math.random()*(t+1)),o=e[n];e[n]=e[t],e[t]=o}return e},getWords:(e,o)=>"1"!==e&&o&&0!==o.length?n.jsonCopy(o):n.jsonCopy(t),jsonCopy:e=>JSON.parse(JSON.stringify(e))})}}}));

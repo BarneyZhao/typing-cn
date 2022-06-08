@@ -1,0 +1,12 @@
+:root {
+    --primary-color: #d0df00;
+    --bg-color: #3f4241;
+    --head-text-color: #d0df00;
+    --home-window-bg-color: #666;
+    --home-window-text-color: #d0df00;
+    --home-countdown-text-color: #d0df00;
+    --home-reload-btn-bg-color: #666;
+    --home-reload-btn-text-color: #d0df00;
+    --word-count-checked-color: #fffffe;
+    --monkey-caret-color: #d0df00;
+}
