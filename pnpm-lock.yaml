@@ -16,7 +16,6 @@ specifiers:
   '@vitejs/plugin-react': ^1.0.7
   antd: ^4.19.1
   chalk: ^4.1.2
-  chinese-to-pinyin: ^1.3.1
   dayjs: ^1.10.8
   eslint: ^8.10.0
   eslint-config-react-app: ^7.0.0
@@ -25,6 +24,7 @@ specifiers:
   less: ^4.1.2
   mustache: ^4.2.0
   open: ^8.4.0
+  pinyin-pro: ^3.15.2
   postcss: ^8.4.8
   postcss-less: ^6.0.0
   prettier: ^2.5.1
@@ -44,8 +44,8 @@ specifiers:
 dependencies:
   '@ant-design/icons': 4.7.0_react-dom@17.0.2+react@17.0.2
   antd: 4.19.1_react-dom@17.0.2+react@17.0.2
-  chinese-to-pinyin: 1.3.1
   dayjs: 1.10.8
+  pinyin-pro: 3.15.2
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-redux: 7.2.6_react-dom@17.0.2+react@17.0.2
@@ -2179,10 +2179,6 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /chinese-to-pinyin/1.3.1:
-    resolution: {integrity: sha512-QGB9HmbMLh726Aj3QKB5NcjKDgKn5NCLMz8rmPfKuU5FgwmF4NT2ULh5/2G6Z0pWBcagtKBS08ymaJcYSvbbQg==}
-    dev: false
-
   /classnames/2.3.1:
     resolution: {integrity: sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==}
     dev: false
@@ -4087,6 +4083,10 @@ packages:
     resolution: {integrity: sha1-clVrgM+g1IqXToDnckjoDtT3+HA=}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /pinyin-pro/3.15.2:
+    resolution: {integrity: sha512-kvbPYwTzz3mXZj7OLheB6LysDi/lIPRFvSXX6fCko03l4joruzrn+2GfO9BqIsHSjqipeH6qPB3jIfl8iRUQWA==}
+    dev: false
 
   /pkg-dir/4.2.0:
     resolution: {integrity: sha512-HRDzbaKjC+AOWVXxAU/x54COGeIv9eb+6CkDSQoNTt4XyWoIJvuPsXizxu/Fr23EiekbtZwmh1IcIG/l/a10GQ==}

@@ -1,6 +1,5 @@
-// @ts-ignore
-import pinyin from 'chinese-to-pinyin';
+import { pinyin } from 'pinyin-pro';
 
 export function getPinyin(word: string) {
-    return pinyin(word, { removeSpace: true, removeTone: true });
+    return pinyin(word, { toneType: 'none', v: true }).replace(/ /g, '');
 }

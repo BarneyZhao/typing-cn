@@ -1,7 +1,7 @@
 {
     "name": "typing-cn",
     "description": "Chinese type test with PinYin.",
-    "version": "20220719a",
+    "version": "20231127a",
     "packageManager": "pnpm@6.27.1",
     "repository": {
         "url": "https://gitee.com/barneyZhao/typing-cn.git",
@@ -20,8 +20,8 @@
     "dependencies": {
         "@ant-design/icons": "^4.7.0",
         "antd": "^4.19.1",
-        "chinese-to-pinyin": "^1.3.1",
         "dayjs": "^1.10.8",
+        "pinyin-pro": "^3.15.2",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-redux": "^7.2.6",
