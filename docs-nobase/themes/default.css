@@ -1,0 +1,40 @@
+:root {
+    /* 全局主色 */
+    --primary-color: #1890ff;
+    /* // --link-color: #1890ff; // 链接色 */
+    /* 成功色 */
+    --success-color: #52c41a;
+    /* // @warning-color: #faad14; // 警告色 */
+    /* 错误色 */
+    --error-color: #f5222d;
+    /* // @font-size-base: 14px; // 主字号 */
+    /* // @heading-color: rgba(0, 0, 0, 0.85); // 标题色 */
+    /* // @text-color: rgba(0, 0, 0, 0.65); // 主文本色 */
+    /* // @text-color-secondary: rgba(0, 0, 0, 0.45); // 次文本色 */
+    /* // @disabled-color: rgba(0, 0, 0, 0.25); // 失效色 */
+    /* // @border-radius-base: 4px; // 组件/浮层圆角 */
+    /* // @border-color-base: #d9d9d9; // 边框色 */
+    /* // @box-shadow-base: 0 2px 8px rgba(0, 0, 0, 0.15); // 浮层阴影 */
+
+    --bg-color: #282c34;
+    --head-text-color: #fffffe;
+
+    --home-window-bg-color: #fffffd;
+    --home-window-text-color: #141414;
+    --home-window-text-sub-color: inherit;
+    --home-window-text-acting-bg-color: rgba(0, 0, 0, 0.26);
+    --success-opacity: inherit;
+    --error-opacity: inherit;
+
+    --home-input-focus-color: rgba(224, 237, 249, 0.21);
+    --home-countdown-bg-color: #666666;
+    --home-countdown-text-color: #fffffe;
+    --home-reload-btn-bg-color: #1890ff;
+    --home-reload-btn-focus-color: rgba(224, 237, 249, 0.21);
+    --home-reload-btn-text-color: #fffffe;
+
+    --word-count-checked-color: #1890ff;
+    --monkey-caret-color: #1890ff;
+    --monkey-sub-color: inherit;
+    --monkey-error-color: red;
+}

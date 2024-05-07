@@ -1,0 +1,21 @@
+:root {
+    --primary-color: #ff79c6;
+    --success-color: #50fa7b;
+    --error-color: #ff5555;
+
+    --bg-color: #282a36;
+    --head-text-color: #f8f8f2;
+
+    --home-window-bg-color: #44475a;
+    --home-window-text-color: #f8f8f2;
+    --home-window-text-sub-color: #f8f8f2;
+    --home-countdown-bg-color: #44475a;
+    --home-countdown-text-color: #f8f8f2;
+    --home-reload-btn-bg-color: #ff5555;
+    --home-reload-btn-text-color: #f8f8f2;
+
+    --word-count-checked-color: #f8f8f2;
+    --monkey-caret-color: #f8f8f2;
+    --monkey-sub-color: #f8f8f2;
+    --monkey-error-color: #ff5555;
+}
