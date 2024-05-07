@@ -10,6 +10,7 @@
     "scripts": {
         "dev": "vite",
         "build": "tsc && vite build",
+        "build-nobase": "tsc && vite build --mode nobase",
         "preview": "vite preview",
         "update-version": "node scripts/updateVersion.js",
         "online": "npm run build && node scripts/deploy.js master",
