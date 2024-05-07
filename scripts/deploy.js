@@ -1,10 +1,11 @@
 // const inquirer = require('inquirer');
 const ghpages = require('gh-pages');
-const openBrowser = require('open');
+// const openBrowser = require('open');
 const chalk = require('chalk');
 
 const repoObj = require('../package.json').repository;
 const branch = process.argv[2];
+const dest = process.argv[3];
 
 const message = `编译后，${branch}分支自动提交`;
 
@@ -22,7 +23,7 @@ const publishTo = (url) => {
             {
                 branch,
                 repo: url,
-                dest: 'docs/',
+                dest,
                 message,
             },
             (err) => {
@@ -75,8 +76,8 @@ const publishTo = (url) => {
     const resArr = [await publishTo(repoObj.url)];
 
     if (resArr.every(Boolean)) {
-        const giteeUrl = 'https://gitee.com/barneyZhao/typing-cn/pages';
-        console.log(` Auto open browser to ${chalk.yellow(giteeUrl)} \n`);
-        openBrowser(giteeUrl);
+        // const giteeUrl = 'https://gitee.com/barneyZhao/typing-cn/pages';
+        // console.log(` Auto open browser to ${chalk.yellow(giteeUrl)} \n`);
+        // openBrowser(giteeUrl);
     }
 })();
