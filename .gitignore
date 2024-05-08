@@ -2,3 +2,4 @@
 !.gitignore
 !/docs
 !/docs-nobase
+!/functions
