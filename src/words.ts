@@ -800,6 +800,218 @@ const defaultWords: Word[] = [
         label: '工作室',
         text: 'gongzuoshi',
     },
+    {
+        label: '抽奖',
+        text: 'choujiang',
+    },
+    {
+        label: '现货',
+        text: 'xianhuo',
+    },
+    {
+        label: '截团',
+        text: 'jietuan',
+    },
+    {
+        label: '期货',
+        text: 'qihuo',
+    },
+    {
+        label: '单晶铜',
+        text: 'danjingtong',
+    },
+    {
+        label: '航插线',
+        text: 'hangchaxian',
+    },
+    {
+        label: '期货',
+        text: 'qihuo',
+    },
+    {
+        label: '芙莉莲',
+        text: 'fulilian',
+    },
+    {
+        label: '铝厂',
+        text: 'lvchang',
+    },
+    {
+        label: '汇木鑫',
+        text: 'huimuxin',
+    },
+    {
+        label: '洛斐',
+        text: 'luofei',
+    },
+    {
+        label: '迈从',
+        text: 'maicong',
+    },
+    {
+        label: '维咖',
+        text: 'weika',
+    },
+    {
+        label: '富贵',
+        text: 'fugui',
+    },
+    {
+        label: '火山灰',
+        text: 'huoshanhui',
+    },
+    {
+        label: '麦旋风',
+        text: 'maixuanfeng',
+    },
+    {
+        label: '铍铜',
+        text: 'pitong',
+    },
+    {
+        label: '浮夸',
+        text: 'fukua',
+    },
+    {
+        label: '爱情故事',
+        text: 'aiqinggushi',
+    },
+    {
+        label: '百灯',
+        text: 'baideng',
+    },
+    {
+        label: '混灯',
+        text: 'hundeng',
+    },
+    {
+        label: '黑灯',
+        text: 'heideng',
+    },
+    {
+        label: '手托',
+        text: 'shoutuo',
+    },
+    {
+        label: '盲盒',
+        text: 'manghe',
+    },
+    {
+        label: '球帽',
+        text: 'qiumao',
+    },
+    {
+        label: '灯帽',
+        text: 'dengmao',
+    },
+    {
+        label: '盖帽',
+        text: 'gaimao',
+    },
+    {
+        label: '陶瓷',
+        text: 'taoci',
+    },
+    {
+        label: '复刻',
+        text: 'fuke',
+    },
+    {
+        label: '复古',
+        text: 'fugu',
+    },
+    {
+        label: '瑕疵',
+        text: 'xiaci',
+    },
+    {
+        label: '冰晶钛',
+        text: 'bingjingtai',
+    },
+    {
+        label: '磁轴',
+        text: 'cizhou',
+    },
+    {
+        label: '薄膜',
+        text: 'baomo',
+    },
+    {
+        label: '三模',
+        text: 'sanmo',
+    },
+    {
+        label: '轴座',
+        text: 'zhouzuo',
+    },
+    {
+        label: '排线',
+        text: 'paixian',
+    },
+    {
+        label: '败家',
+        text: 'baijia',
+    },
+    {
+        label: '搬砖',
+        text: 'banzhuan',
+    },
+    {
+        label: '买家秀',
+        text: 'maijiaxiu',
+    },
+    {
+        label: '闲鱼',
+        text: 'xianyu',
+    },
+    {
+        label: '风信子',
+        text: 'fengxinzi',
+    },
+    {
+        label: '酒红',
+        text: 'jiuhong',
+    },
+    {
+        label: '汉白玉',
+        text: 'hanbaiyu',
+    },
+    {
+        label: '胖虎',
+        text: 'panghu',
+    },
+    {
+        label: '钛合金',
+        text: 'taihejin',
+    },
+    {
+        label: '钢琴师',
+        text: 'gangqinshi',
+    },
+    {
+        label: '钻石',
+        text: 'zuanshi',
+    },
+    {
+        label: '快银',
+        text: 'kuaiyin',
+    },
+    {
+        label: '金粉',
+        text: 'jinfen',
+    },
+    {
+        label: '公主',
+        text: 'gongzhu',
+    },
+    {
+        label: '海粟',
+        text: 'haisu',
+    },
+    {
+        label: '扎古',
+        text: 'zhagu',
+    },
 ];
 
 export default defaultWords;
